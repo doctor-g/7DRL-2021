@@ -17,6 +17,7 @@ func _ready():
 	_update_ap_label()
 	_update_room_label()
 	player.connect("hp_changed", $PlayerInfoPanel, "on_Player_hp_changed", [player])
+	player.connect("weapon_changed", $PlayerInfoPanel, "on_Player_weapon_changed", [player])
 	$PlayerInfoPanel.init(player)
 	
 	# Load the cards
@@ -146,14 +147,15 @@ func has_loot() -> bool:
 
 func _on_Monster_attacked(monster)->void:
 	if ap > 0:
-		monster.hp -= 1
+		var damage : int = player.weapon.compute_damage()
+		monster.hp -= damage
 		ap -= 1
 		_update_ap_label()
 
 
 func _on_Item_looted(item)->void:
 	if ap > 0:
-		print("LOOTED")
+		item.pickup(player)
 		item.queue_free()
 		ap -= 1
 		

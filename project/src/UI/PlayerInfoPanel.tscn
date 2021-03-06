@@ -20,3 +20,9 @@ margin_bottom = 593.0
 margin_right = 1010.0
 margin_bottom = 14.0
 text = "HP: X/Y"
+
+[node name="WeaponLabel" type="Label" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 1010.0
+margin_bottom = 32.0
+text = "Weapon: XYZ"
