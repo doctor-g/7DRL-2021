@@ -18,11 +18,12 @@ func _ready():
 	_update_room_label()
 	player.connect("hp_changed", $PlayerInfoPanel, "on_Player_hp_changed", [player])
 	player.connect("weapon_changed", $PlayerInfoPanel, "on_Player_weapon_changed", [player])
+	player.connect("gold_changed", $PlayerInfoPanel, "on_Player_gold_changed", [player])
 	$PlayerInfoPanel.init(player)
 	
 	# Load the cards
-	var test = ["SmallChamber.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd", "Weapon.gd",
-	 "Weapon.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd"]
+	var test = ["SmallChamber.gd", "Gold.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd", "Weapon.gd",
+	 "Weapon.gd", "Goblin.gd", "Weapon.gd"]
 	for script in test:
 		var card = _Card.instance()
 		card.command = load("res://src/Cards/%s" % script).new()
