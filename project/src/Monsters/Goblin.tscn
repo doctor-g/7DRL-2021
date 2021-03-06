@@ -12,3 +12,12 @@ centered = false
 vframes = 22
 hframes = 48
 frame = 27
+
+[node name="HpLabel" type="Label" parent="."]
+margin_top = 19.1034
+margin_right = 40.0
+margin_bottom = 33.1034
+text = "X/Y"
+__meta__ = {
+"_edit_use_anchors_": false
+}

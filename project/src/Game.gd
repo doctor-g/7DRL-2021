@@ -110,9 +110,13 @@ func _on_ActionsDoneButton_pressed():
 
 func _on_AttackButton_pressed():
 	assert(_has_monster(), "There is no monster to attack")
-	$MonsterSlot.get_child(0).defeat()
+	assert(ap > 0)
+	var monster = $MonsterSlot.get_child(0)
+	print("You strike it!")
+	monster.hp -= 1
 	ap -= 1
 	_update_ap_label()
+	_update_action_buttons()
 
 
 func _on_LootButton_pressed():
