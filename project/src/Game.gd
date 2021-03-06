@@ -15,9 +15,9 @@ onready var _Card := load("res://src/Card.tscn")
 func _ready():
 	# Initialize UI
 	_update_ap_label()
-	_update_hp_label()
 	_update_room_label()
-	player.connect("hp_changed", self, "_update_hp_label")
+	player.connect("hp_changed", $PlayerInfoPanel, "on_Player_hp_changed", [player])
+	$PlayerInfoPanel.init(player)
 	
 	# Load the cards
 	var test = ["SmallChamber.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd", "Weapon.gd",
@@ -46,10 +46,6 @@ func _set_room(value)->void:
 func _update_room_label():
 	$RoomNameLabel.text = room.name
 	
-
-func _update_hp_label() -> void:
-	$HPLabel.text = "HP: %d" % player.hp
-
 
 func _draw_hand():
 	for _i in range(0,5):

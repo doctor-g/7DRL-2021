@@ -2,7 +2,8 @@ extends Node
 
 signal hp_changed
 
-var hp := 10 setget _set_hp
+var max_hp := 10
+var hp := max_hp setget _set_hp
 
 
 func _set_hp(value):

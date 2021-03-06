@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Game.gd" type="Script" id=1]
 [ext_resource path="res://src/Door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/PlayerInfoPanel.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -69,16 +70,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HPLabel" type="Label" parent="."]
-margin_left = 61.7354
-margin_top = 555.619
-margin_right = 101.735
-margin_bottom = 569.619
-text = "HP: XY"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="RoomNameLabel" type="Label" parent="."]
 margin_left = 384.585
 margin_top = 26.4866
@@ -88,5 +79,11 @@ text = "RoomName"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PlayerInfoPanel" parent="." instance=ExtResource( 3 )]
+margin_left = 821.084
+margin_top = 11.6541
+margin_right = 1024.0
+margin_bottom = 400.0
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
 [connection signal="pressed" from="ActionsDoneButton" to="." method="_on_ActionsDoneButton_pressed"]
