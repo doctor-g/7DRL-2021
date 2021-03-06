@@ -37,6 +37,7 @@ func _draw_hand():
 		var card = _deck.pop_front()
 		card.connect("played", self, "_on_Card_played", [card], CONNECT_ONESHOT)
 		add_card(card)
+	_update_cards()
 
 
 func _on_Card_played(card) -> void:
@@ -53,6 +54,7 @@ func add_monster(monster)->void:
 	assert($MonsterSlot.get_child_count()==0, "Can only have one monster")
 	$MonsterSlot.add_child(monster)
 	monster.connect("defeated", self, "_on_Monster_defeated", [monster], CONNECT_ONESHOT)
+	_update_cards()
 	
 
 func _on_Monster_defeated(monster)->void:
@@ -60,10 +62,16 @@ func _on_Monster_defeated(monster)->void:
 	monster.queue_free()
 	_update_action_buttons()
 	
+
+func _update_cards():
+	for card in $CardBox.get_children():
+		card.update_playability(self)
+
 	
 func add_item(item)->void:
 	assert($ItemSlot.get_child_count()==0, "Can only have one item")
 	$ItemSlot.add_child(item)
+	_update_cards()
 
 
 func _on_CardsDoneButton_pressed():
@@ -78,13 +86,13 @@ func _on_CardsDoneButton_pressed():
 
 
 func _update_action_buttons():
-	$HBoxContainer/AttackButton.disabled = not _has_monster() or ap==0
-	$HBoxContainer/LootButton.disabled = not _has_loot() or _has_monster() or ap==0
-	$HBoxContainer/RestButton.disabled = _has_monster() or ap==0
+	$HBoxContainer/AttackButton.disabled = not has_monster() or ap==0
+	$HBoxContainer/LootButton.disabled = not has_loot() or has_monster() or ap==0
+	$HBoxContainer/RestButton.disabled = has_monster() or ap==0
 	$ActionsDoneButton.disabled = false
 	
 	
-func _has_monster():
+func has_monster():
 	return $MonsterSlot.get_child_count() > 0
 
 
@@ -101,7 +109,7 @@ func _on_ActionsDoneButton_pressed():
 	$CardsDoneButton.disabled = false
 	$ActionsDoneButton.disabled = true
 	
-	if _has_monster():
+	if has_monster():
 		print("The goblin strikes you!")
 		player.hp -= 2
 	
@@ -109,7 +117,7 @@ func _on_ActionsDoneButton_pressed():
 
 
 func _on_AttackButton_pressed():
-	assert(_has_monster(), "There is no monster to attack")
+	assert(has_monster(), "There is no monster to attack")
 	assert(ap > 0)
 	var monster = $MonsterSlot.get_child(0)
 	print("You strike it!")
@@ -120,7 +128,7 @@ func _on_AttackButton_pressed():
 
 
 func _on_LootButton_pressed():
-	assert(_has_loot(), "There is no loot")
+	assert(has_loot(), "There is no loot")
 	print("You got loot")
 	$ItemSlot.remove_child($ItemSlot.get_child(0))
 	_update_action_buttons()
@@ -128,5 +136,5 @@ func _on_LootButton_pressed():
 	_update_ap_label()
 
 
-func _has_loot() -> bool:
+func has_loot() -> bool:
 	return $ItemSlot.get_child_count() > 0

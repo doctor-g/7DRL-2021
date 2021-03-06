@@ -10,7 +10,16 @@ func _ready():
 	$Button.text = command.name
 
 
+func update_playability(game:Game) -> void:
+	$Button.disabled = not can_play(game)
+
+
+func can_play(game:Game)->bool:
+	return command.can_play(game)
+	
+
 func play(game:Game) -> void:
+	assert(can_play(game))
 	command.execute(game)
 
 
