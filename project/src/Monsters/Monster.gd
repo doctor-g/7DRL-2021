@@ -1,5 +1,6 @@
-extends Node2D
+extends Area2D
 
+signal pressed
 signal defeated
 
 var max_hp := 5
@@ -22,3 +23,9 @@ func _set_hp(value):
 	_update_hp_label()
 	if hp <= 0:
 		emit_signal("defeated")
+
+
+func _input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("pressed")
+	

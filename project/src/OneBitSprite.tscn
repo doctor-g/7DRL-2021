@@ -4,7 +4,6 @@
 
 [node name="Sprite" type="Sprite"]
 texture = ExtResource( 1 )
-centered = false
 vframes = 22
 hframes = 48
 frame = 27

@@ -1,23 +1,30 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/monochrome_packed.png" type="Texture" id=1]
 [ext_resource path="res://src/Monsters/Monster.gd" type="Script" id=2]
 
-[node name="Goblin" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 11.7119, 16.1342 )
+
+[node name="Goblin" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-centered = false
 vframes = 22
 hframes = 48
 frame = 27
 
 [node name="HpLabel" type="Label" parent="."]
-margin_top = 19.1034
-margin_right = 40.0
-margin_bottom = 33.1034
+margin_left = -10.1136
+margin_top = 8.24067
+margin_right = 29.8864
+margin_bottom = 22.2407
 text = "X/Y"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4.8695 )
+shape = SubResource( 1 )

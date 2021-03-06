@@ -5,7 +5,7 @@ func _init():
 
 
 func can_play(game:Game) -> bool:
-	return not game.has_monster()
+	return game.count_monsters() < game.room.max_monsters
 	
 
 func execute(game:Game) -> void:

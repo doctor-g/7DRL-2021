@@ -5,9 +5,9 @@ func _init():
 
 
 func can_play(game:Game) -> bool:
-	return game.has_monster() and not game.has_loot()
+	return game.has_monster() and game.count_items() < game.room.max_items
 
 
 func execute(game:Game) -> void:
-	var weapon = preload("res://src/Items/Weapon.tscn").instance()
+	var weapon = preload("res://src/Items/Item.tscn").instance()
 	game.add_item(weapon)

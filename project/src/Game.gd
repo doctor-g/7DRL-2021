@@ -1,8 +1,11 @@
 class_name Game 
 extends Node2D
 
+const _Tunnel := preload("res://src/Rooms/Tunnel.gd")
+
 var ap := 0
 var player := preload("res://src/Player.gd").new()
+var room = _Tunnel.new() setget _set_room
 
 var _deck = []
 var _discard = []
@@ -13,17 +16,36 @@ func _ready():
 	# Initialize UI
 	_update_ap_label()
 	_update_hp_label()
+	_update_room_label()
 	player.connect("hp_changed", self, "_update_hp_label")
 	
 	# Load the cards
-	var test = ["Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd", "Weapon.gd",
-	 "Weapon.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd"]
+	var test = ["SmallChamber.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd", "Weapon.gd",
+	 "Weapon.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd"]
 	for script in test:
 		var card = _Card.instance()
 		card.command = load("res://src/Cards/%s" % script).new()
 		_deck.append(card)
 	_draw_hand()
 
+
+func count_monsters() -> int:
+	return $MonsterSlot.get_child_count()
+
+
+func count_items() -> int:
+	return $ItemSlot.get_child_count()
+
+
+func _set_room(value)->void:
+	room = value
+	_update_room_label()
+	_update_cards()
+
+
+func _update_room_label():
+	$RoomNameLabel.text = room.name
+	
 
 func _update_hp_label() -> void:
 	$HPLabel.text = "HP: %d" % player.hp
@@ -56,7 +78,7 @@ func add_monster(monster)->void:
 	monster.connect("defeated", self, "_on_Monster_defeated", [monster], CONNECT_ONESHOT)
 	_update_cards()
 	
-
+	
 func _on_Monster_defeated(monster)->void:
 	$MonsterSlot.remove_child(monster)
 	monster.queue_free()
@@ -83,11 +105,16 @@ func _on_CardsDoneButton_pressed():
 		_discard.append(child)
 	_update_action_buttons()
 	$CardsDoneButton.disabled = true
-
-
+	
+	# Listen for attacking the monsters
+	for monster in $MonsterSlot.get_children():
+		monster.connect("pressed", self, "_on_Monster_attacked", [monster])
+	# Listen for looting the items
+	for item in $ItemSlot.get_children():
+		item.connect("pressed", self, "_on_Item_looted", [item])
+	
+	
 func _update_action_buttons():
-	$HBoxContainer/AttackButton.disabled = not has_monster() or ap==0
-	$HBoxContainer/LootButton.disabled = not has_loot() or has_monster() or ap==0
 	$HBoxContainer/RestButton.disabled = has_monster() or ap==0 or player.hp == 10
 	$HBoxContainer/AdvanceButton.disabled = has_monster() or ap == 0
 	$ActionsDoneButton.disabled = false
@@ -105,39 +132,21 @@ func _on_ActionsDoneButton_pressed():
 	if has_monster():
 		print("The goblin strikes you!")
 		player.hp -= 2
-	_finish_action_phase()	
+	_finish_action_phase()
 
 
 func _finish_action_phase()->void:
+	for monster in $MonsterSlot.get_children():
+		monster.disconnect("pressed", self, "_on_Monster_attacked")
+	for item in $ItemSlot.get_children():
+		item.disconnect("pressed", self, "_on_Item_looted")
 	ap = 0
 	_update_ap_label()
-	$HBoxContainer/AttackButton.disabled = true
-	$HBoxContainer/LootButton.disabled = true
 	$HBoxContainer/RestButton.disabled = true
 	$HBoxContainer/AdvanceButton.disabled = true
 	$CardsDoneButton.disabled = false
 	$ActionsDoneButton.disabled = true
 	_draw_hand()	
-
-
-func _on_AttackButton_pressed():
-	assert(has_monster(), "There is no monster to attack")
-	assert(ap > 0)
-	var monster = $MonsterSlot.get_child(0)
-	print("You strike it!")
-	monster.hp -= 1
-	ap -= 1
-	_update_ap_label()
-	_update_action_buttons()
-
-
-func _on_LootButton_pressed():
-	assert(has_loot(), "There is no loot")
-	print("You got loot")
-	$ItemSlot.remove_child($ItemSlot.get_child(0))
-	_update_action_buttons()
-	ap -= 1
-	_update_ap_label()
 
 
 func has_loot() -> bool:
@@ -154,10 +163,33 @@ func _on_RestButton_pressed():
 
 func _on_AdvanceButton_pressed():
 	assert(not has_monster())
-	_remove_all_children_from($ItemSlot)
+	for item in $ItemSlot.get_children():
+		$ItemSlot.remove_child(item)
+		item.disconnect("pressed", self, "_on_Item_looted")
+	_set_room(_Tunnel.new())
 	_finish_action_phase()
 
 
-func _remove_all_children_from(node:Node2D):
-	for child in node.get_children():
-		node.remove_child(child)
+
+func _on_Monster_attacked(monster)->void:
+	if ap > 0:
+		monster.hp -= 1
+		ap -= 1
+		_update_ap_label()
+		_update_action_buttons()
+
+
+func _on_Item_looted(item)->void:
+	if ap > 0:
+		print("LOOTED")
+		item.queue_free()
+		ap -= 1
+		
+		item.disconnect("pressed", self, "_on_Item_looted")
+		
+		for monster in $MonsterSlot.get_children():
+			print("The %s attacks you!" % monster.name)
+			player.hp -= 2
+		
+		_update_ap_label()
+		_update_action_buttons()
