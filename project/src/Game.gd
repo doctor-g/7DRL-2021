@@ -16,9 +16,6 @@ func _ready():
 	# Initialize UI
 	_update_ap_label()
 	_update_room_label()
-	player.connect("hp_changed", $PlayerInfoPanel, "on_Player_hp_changed", [player])
-	player.connect("weapon_changed", $PlayerInfoPanel, "on_Player_weapon_changed", [player])
-	player.connect("gold_changed", $PlayerInfoPanel, "on_Player_gold_changed", [player])
 	$PlayerInfoPanel.init(player)
 	
 	# Load the cards
