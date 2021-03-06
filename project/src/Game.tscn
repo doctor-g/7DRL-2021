@@ -101,5 +101,6 @@ __meta__ = {
 }
 [connection signal="pressed" from="HBoxContainer/AttackButton" to="." method="_on_AttackButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LootButton" to="." method="_on_LootButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/RestButton" to="." method="_on_RestButton_pressed"]
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
 [connection signal="pressed" from="ActionsDoneButton" to="." method="_on_ActionsDoneButton_pressed"]

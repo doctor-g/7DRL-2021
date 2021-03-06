@@ -88,7 +88,7 @@ func _on_CardsDoneButton_pressed():
 func _update_action_buttons():
 	$HBoxContainer/AttackButton.disabled = not has_monster() or ap==0
 	$HBoxContainer/LootButton.disabled = not has_loot() or has_monster() or ap==0
-	$HBoxContainer/RestButton.disabled = has_monster() or ap==0
+	$HBoxContainer/RestButton.disabled = has_monster() or ap==0 or player.hp == 10
 	$ActionsDoneButton.disabled = false
 	
 	
@@ -138,3 +138,10 @@ func _on_LootButton_pressed():
 
 func has_loot() -> bool:
 	return $ItemSlot.get_child_count() > 0
+
+
+func _on_RestButton_pressed():
+	assert(player.hp < 10)
+	player.hp += 1
+	ap -= 1
+	_update_ap_label()
