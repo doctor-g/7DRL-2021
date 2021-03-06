@@ -2,6 +2,7 @@ class_name Game
 extends Node2D
 
 var ap := 0
+var player := preload("res://src/Player.gd").new()
 
 var _deck = []
 var _discard = []
@@ -11,6 +12,8 @@ onready var _Card := load("res://src/Card.tscn")
 func _ready():
 	# Initialize UI
 	_update_ap_label()
+	_update_hp_label()
+	player.connect("hp_changed", self, "_update_hp_label")
 	
 	# Load the cards
 	var test = ["Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd", "Weapon.gd",
@@ -20,7 +23,11 @@ func _ready():
 		card.command = load("res://src/Cards/%s" % script).new()
 		_deck.append(card)
 	_draw_hand()
-	
+
+
+func _update_hp_label() -> void:
+	$HPLabel.text = "HP: %d" % player.hp
+
 
 func _draw_hand():
 	for _i in range(0,5):
@@ -93,6 +100,11 @@ func _on_ActionsDoneButton_pressed():
 	$HBoxContainer/RestButton.disabled = true
 	$CardsDoneButton.disabled = false
 	$ActionsDoneButton.disabled = true
+	
+	if _has_monster():
+		print("The goblin strikes you!")
+		player.hp -= 2
+	
 	_draw_hand()
 
 

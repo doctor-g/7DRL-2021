@@ -89,6 +89,16 @@ text = "Done"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HPLabel" type="Label" parent="."]
+margin_left = 61.7354
+margin_top = 555.619
+margin_right = 101.735
+margin_bottom = 569.619
+text = "HP: XY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="HBoxContainer/AttackButton" to="." method="_on_AttackButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LootButton" to="." method="_on_LootButton_pressed"]
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
