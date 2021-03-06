@@ -4,6 +4,6 @@ func _init():
 	name = "Goblin"
 
 
-func execute() -> void:
+func execute(game:Game) -> void:
 	var goblin = preload("res://src/Monsters/Goblin.tscn").instance()
-	GameState.room.add_monster(goblin)
+	game.add_monster(goblin)

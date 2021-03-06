@@ -1,19 +1,25 @@
 extends Node2D
 
 onready var _monsters := $Monsters
+onready var _cards := $Cards
+onready var _action_bar := $ActionBar
 
 func _ready():
 	# Initialize the global state
 	GameState.room = self
 	
-	# Load the cards
-	var card = preload("res://src/Card.tscn").instance()
-	card.command = load("res://src/Commands/Goblin.gd").new()
-	add_child(card)
-	card.position = Vector2(100,100)
+
+
 
 
 func add_monster(monster)->void:
 	_monsters.add_child(monster)
 	
 	
+func _on_DoneButton_pressed():
+	_cards.visible = false
+	_enable_action_bar()
+	
+
+func _enable_action_bar():
+	$ActionBar/AttackButton.disabled = false

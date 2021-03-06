@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Game.gd" type="Script" id=1]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 408.23
+margin_top = 559.19
+margin_right = 604.23
+margin_bottom = 579.19
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="APLabel" type="Label" parent="HBoxContainer"]
+margin_top = 3.0
+margin_right = 33.0
+margin_bottom = 17.0
+text = "AP: X"
+
+[node name="AttackButton" type="Button" parent="HBoxContainer"]
+margin_left = 37.0
+margin_right = 89.0
+margin_bottom = 20.0
+disabled = true
+text = "Attack"
+
+[node name="LootButton" type="Button" parent="HBoxContainer"]
+margin_left = 93.0
+margin_right = 133.0
+margin_bottom = 20.0
+disabled = true
+text = "Loot"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestButton" type="Button" parent="HBoxContainer"]
+margin_left = 137.0
+margin_right = 177.0
+margin_bottom = 20.0
+disabled = true
+text = "Rest"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CardBox" type="HBoxContainer" parent="."]
+margin_top = 415.311
+margin_right = 1024.0
+margin_bottom = 455.311
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonsterSlot" type="Node2D" parent="."]
+position = Vector2( 197.553, 85.3071 )
+
+[node name="ItemSlot" type="Node2D" parent="."]
+position = Vector2( 636.436, 85.3071 )
+
+[node name="CardsDoneButton" type="Button" parent="."]
+margin_left = 966.44
+margin_top = 499.495
+margin_right = 1012.44
+margin_bottom = 519.495
+text = "Done"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActionsDoneButton" type="Button" parent="."]
+margin_left = 966.44
+margin_top = 561.231
+margin_right = 1012.44
+margin_bottom = 581.231
+disabled = true
+text = "Done"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="HBoxContainer/AttackButton" to="." method="_on_AttackButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/LootButton" to="." method="_on_LootButton_pressed"]
+[connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
+[connection signal="pressed" from="ActionsDoneButton" to="." method="_on_ActionsDoneButton_pressed"]

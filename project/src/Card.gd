@@ -1,12 +1,18 @@
-extends Node2D
+extends Control
+
+signal played
 
 var command 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
+	assert(command!=null, "Command may not be null")
 	$Button.text = command.name
 
 
+func play(game:Game) -> void:
+	command.execute(game)
+
+
 func _on_Button_pressed():
-	command.execute()
-	queue_free()
+	emit_signal("played")
