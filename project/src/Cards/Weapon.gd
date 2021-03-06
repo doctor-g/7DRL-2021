@@ -12,4 +12,5 @@ func execute(game:Game) -> void:
 	var weapon = preload("res://src/Items/Item.tscn").instance()
 	weapon.frame = 323
 	weapon.type = load("res://src/Items/WeaponType.gd").new()
+	weapon.type.weapon = load("res://src/Weapons/Dagger.gd").new()
 	game.add_item(weapon)

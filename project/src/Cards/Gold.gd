@@ -12,4 +12,5 @@ func execute(game:Game) -> void:
 	var item = preload("res://src/Items/Item.tscn").instance()
 	item.frame = 803
 	item.type = load("res://src/Items/GoldType.gd").new()
+	item.type.amount = 100
 	game.add_item(item)
