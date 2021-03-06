@@ -89,6 +89,7 @@ func _update_action_buttons():
 	$HBoxContainer/AttackButton.disabled = not has_monster() or ap==0
 	$HBoxContainer/LootButton.disabled = not has_loot() or has_monster() or ap==0
 	$HBoxContainer/RestButton.disabled = has_monster() or ap==0 or player.hp == 10
+	$HBoxContainer/AdvanceButton.disabled = has_monster() or ap == 0
 	$ActionsDoneButton.disabled = false
 	
 	
@@ -101,19 +102,22 @@ func _update_ap_label() -> void:
 
 
 func _on_ActionsDoneButton_pressed():
+	if has_monster():
+		print("The goblin strikes you!")
+		player.hp -= 2
+	_finish_action_phase()	
+
+
+func _finish_action_phase()->void:
 	ap = 0
 	_update_ap_label()
 	$HBoxContainer/AttackButton.disabled = true
 	$HBoxContainer/LootButton.disabled = true
 	$HBoxContainer/RestButton.disabled = true
+	$HBoxContainer/AdvanceButton.disabled = true
 	$CardsDoneButton.disabled = false
 	$ActionsDoneButton.disabled = true
-	
-	if has_monster():
-		print("The goblin strikes you!")
-		player.hp -= 2
-	
-	_draw_hand()
+	_draw_hand()	
 
 
 func _on_AttackButton_pressed():
@@ -145,3 +149,15 @@ func _on_RestButton_pressed():
 	player.hp += 1
 	ap -= 1
 	_update_ap_label()
+	_update_action_buttons()
+
+
+func _on_AdvanceButton_pressed():
+	assert(not has_monster())
+	_remove_all_children_from($ItemSlot)
+	_finish_action_phase()
+
+
+func _remove_all_children_from(node:Node2D):
+	for child in node.get_children():
+		node.remove_child(child)

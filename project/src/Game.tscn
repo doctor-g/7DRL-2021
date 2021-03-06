@@ -54,6 +54,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AdvanceButton" type="Button" parent="HBoxContainer"]
+margin_left = 181.0
+margin_right = 247.0
+margin_bottom = 20.0
+disabled = true
+text = "Advance"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CardBox" type="HBoxContainer" parent="."]
 margin_top = 415.311
 margin_right = 1024.0
@@ -102,5 +112,6 @@ __meta__ = {
 [connection signal="pressed" from="HBoxContainer/AttackButton" to="." method="_on_AttackButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/LootButton" to="." method="_on_LootButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/RestButton" to="." method="_on_RestButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/AdvanceButton" to="." method="_on_AdvanceButton_pressed"]
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
 [connection signal="pressed" from="ActionsDoneButton" to="." method="_on_ActionsDoneButton_pressed"]
