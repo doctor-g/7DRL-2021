@@ -1,4 +1,4 @@
-class_name Game 
+class_name Game
 extends Node2D
 
 const _Tunnel := preload("res://src/Rooms/Tunnel.gd")
@@ -82,8 +82,7 @@ func add_monster(monster)->void:
 func _on_Monster_defeated(monster)->void:
 	$MonsterSlot.remove_child(monster)
 	monster.queue_free()
-	_update_action_buttons()
-	
+
 
 func _update_cards():
 	for card in $CardBox.get_children():
@@ -103,21 +102,15 @@ func _on_CardsDoneButton_pressed():
 		child.disconnect("played", self, "_on_Card_played")
 		$CardBox.remove_child(child)
 		_discard.append(child)
-	_update_action_buttons()
 	$CardsDoneButton.disabled = true
+	$ActionsDoneButton.disabled = false
 	
-	# Listen for attacking the monsters
+	# Listen for interactions
 	for monster in $MonsterSlot.get_children():
 		monster.connect("pressed", self, "_on_Monster_attacked", [monster])
-	# Listen for looting the items
 	for item in $ItemSlot.get_children():
 		item.connect("pressed", self, "_on_Item_looted", [item])
-	
-	
-func _update_action_buttons():
-	$HBoxContainer/RestButton.disabled = has_monster() or ap==0 or player.hp == 10
-	$HBoxContainer/AdvanceButton.disabled = has_monster() or ap == 0
-	$ActionsDoneButton.disabled = false
+	$DoorSlot.get_child(0).connect("pressed", self, "_on_Door_pressed")
 	
 	
 func has_monster():
@@ -136,14 +129,16 @@ func _on_ActionsDoneButton_pressed():
 
 
 func _finish_action_phase()->void:
+	# Disconnect signals
 	for monster in $MonsterSlot.get_children():
 		monster.disconnect("pressed", self, "_on_Monster_attacked")
 	for item in $ItemSlot.get_children():
 		item.disconnect("pressed", self, "_on_Item_looted")
+	$DoorSlot.get_child(0).disconnect("pressed", self, "_on_Door_pressed")
+	
+	# Clean up the phase
 	ap = 0
 	_update_ap_label()
-	$HBoxContainer/RestButton.disabled = true
-	$HBoxContainer/AdvanceButton.disabled = true
 	$CardsDoneButton.disabled = false
 	$ActionsDoneButton.disabled = true
 	_draw_hand()	
@@ -153,30 +148,11 @@ func has_loot() -> bool:
 	return $ItemSlot.get_child_count() > 0
 
 
-func _on_RestButton_pressed():
-	assert(player.hp < 10)
-	player.hp += 1
-	ap -= 1
-	_update_ap_label()
-	_update_action_buttons()
-
-
-func _on_AdvanceButton_pressed():
-	assert(not has_monster())
-	for item in $ItemSlot.get_children():
-		$ItemSlot.remove_child(item)
-		item.disconnect("pressed", self, "_on_Item_looted")
-	_set_room(_Tunnel.new())
-	_finish_action_phase()
-
-
-
 func _on_Monster_attacked(monster)->void:
 	if ap > 0:
 		monster.hp -= 1
 		ap -= 1
 		_update_ap_label()
-		_update_action_buttons()
 
 
 func _on_Item_looted(item)->void:
@@ -187,9 +163,25 @@ func _on_Item_looted(item)->void:
 		
 		item.disconnect("pressed", self, "_on_Item_looted")
 		
-		for monster in $MonsterSlot.get_children():
-			print("The %s attacks you!" % monster.name)
-			player.hp -= 2
+		_do_all_monster_attack()
 		
 		_update_ap_label()
-		_update_action_buttons()
+
+
+func _on_Door_pressed():
+	if has_monster():
+		_do_all_monster_attack()
+		ap -= 1
+		_update_ap_label()
+	else:
+		for item in $ItemSlot.get_children():
+			$ItemSlot.remove_child(item)
+			item.disconnect("pressed", self, "_on_Item_looted")
+		_set_room(_Tunnel.new())
+		_finish_action_phase()
+
+
+func _do_all_monster_attack():
+	for monster in $MonsterSlot.get_children():
+		print("The %s attacks you!" % monster.name)
+		player.hp -= 2
