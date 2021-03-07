@@ -23,6 +23,7 @@ func _ready():
 	# Initialize UI
 	$PlayerInfoPanel.init(player)
 	$PhasePanel.bind_to(self)
+	$ShopPanel.bind_to(self)
 	_set_room(_Tunnel.new())
 	
 	# Load the cards
@@ -54,8 +55,6 @@ func count_items() -> int:
 func _set_room(new_room)->void:
 	if room!=null:
 		$RoomInfoPanel.unbind_from(room)
-		new_room.monsters_played = room.monsters_played
-		new_room.items_played = room.items_played
 	room = new_room
 	$RoomInfoPanel.bind_to(room)	
 	_update_cards()
@@ -75,6 +74,10 @@ func _draw_hand():
 func _on_Card_played(card) -> void:
 	card.play(self)
 	$CardPanel.remove(card)
+	add_to_discard(card)
+	
+
+func add_to_discard(card):
 	_discard.append(card)
 
 
@@ -118,6 +121,7 @@ func _on_CardsDoneButton_pressed():
 		item.connect("pressed", self, "_on_Item_looted", [item])
 	$DoorSlot.get_child(0).connect("pressed", self, "_on_Door_pressed")
 	
+	$ShopPanel.visible = true
 	_set_phase(ADVENTURE_PHASE)
 	
 	
@@ -142,6 +146,7 @@ func _finish_action_phase()->void:
 	# Clean up the phase
 	_set_ap(0)
 	$CardsDoneButton.disabled = false
+	$ShopPanel.visible = false
 	_draw_hand()
 	_set_phase(BUILD_PHASE)
 

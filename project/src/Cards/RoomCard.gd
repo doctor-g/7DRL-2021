@@ -1,5 +1,7 @@
 extends Node
 
+var level := 1
+
 func _init():
 	name = "Small Chamber"
 

@@ -38,6 +38,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LevelLabel" type="Label" parent="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 22.6786
+margin_right = 20.0
+margin_bottom = 36.6786
+text = "(level)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 50, 62 )
 shape = SubResource( 1 )

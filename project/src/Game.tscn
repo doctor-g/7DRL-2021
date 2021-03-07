@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Game.gd" type="Script" id=1]
 [ext_resource path="res://src/Door.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/UI/RoomInfoPanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/PhasePanel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/CardPanel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/UI/ShopPanel.tscn" type="PackedScene" id=7]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -56,5 +57,11 @@ margin_left = 1.0
 margin_top = 400.0
 margin_right = 801.0
 margin_bottom = 538.0
+
+[node name="ShopPanel" parent="." instance=ExtResource( 7 )]
+visible = false
+margin_top = 426.0
+margin_right = 800.0
+margin_bottom = 598.0
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
 [connection signal="done_pressed" from="PhasePanel" to="." method="_on_PhasePanel_done_pressed"]

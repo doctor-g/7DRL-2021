@@ -1,12 +1,19 @@
 extends Node
 
 var _armors = {
-	0: [
+	1: [
 		[ "Padded Armor", +2, 80 ], 
 		[ "Leather Armor", +2, 80 ], 
 		[ "Heavy Clothes", +1, 85 ]
+	],
+	2: [
+		[ "Ring Mail", +4, 82 ],
+		[ "Studded Leather", +3, 80 ],
+		[ "Chain Mail", +4, 82 ]
 	]
 }
+
+var level := 1
 
 func _init():
 	name = "Armor"
@@ -18,7 +25,7 @@ func can_play(game:Game) -> bool:
 
 
 func execute(game:Game) -> void:
-	var armor_data = _select_armor(0)
+	var armor_data = _select_armor(level)
 	var armor = preload("res://src/Items/Item.tscn").instance()
 	armor.set_script(load("res://src/Items/Armor.gd"))
 	armor.name = armor_data[0]
@@ -27,6 +34,6 @@ func execute(game:Game) -> void:
 	game.add_item(armor)
 
 
-func _select_armor(level:int)->Array:
-	var options : Array = _armors[level]
+func _select_armor(lev:int)->Array:
+	var options : Array = _armors[lev]
 	return options[randi()%options.size()]

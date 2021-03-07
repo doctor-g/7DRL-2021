@@ -20,8 +20,10 @@ func _ready():
 	if command == null:
 		print("Command should not be null, but maybe you're just testing something.")
 		$Control/Title.text = "Test Card"
+		$Control/LevelLabel.text = "?"
 	else:
 		$Control/Title.text = command.name
+		$Control/LevelLabel.text = "?" if command.get("level") == null else str(command.get("level"))
 	_set_xp(0) # Trigger label update
 
 

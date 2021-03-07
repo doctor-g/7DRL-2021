@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/ShopPanel.gd" type="Script" id=1]
+
+[node name="ShopPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.309804, 0.188235, 0.188235, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -57.0
+margin_right = 57.0
+margin_bottom = 14.0
+text = "Expand Your Skills"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_top = 28.0316
+margin_bottom = 28.0316
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button1" type="Button" parent="HBox"]
+margin_left = 370.0
+margin_right = 382.0
+margin_bottom = 20.0
+
+[node name="Button2" type="Button" parent="HBox"]
+margin_left = 386.0
+margin_right = 398.0
+margin_bottom = 20.0
+
+[node name="Button3" type="Button" parent="HBox"]
+margin_left = 402.0
+margin_right = 414.0
+margin_bottom = 20.0
+
+[node name="Button4" type="Button" parent="HBox"]
+margin_left = 418.0
+margin_right = 430.0
+margin_bottom = 20.0
