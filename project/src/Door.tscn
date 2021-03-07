@@ -4,8 +4,10 @@
 [ext_resource path="res://src/Door.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25.639, 24.7306 )
 
 [node name="Door" type="Area2D"]
+position = Vector2( 0, -0.280624 )
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." instance=ExtResource( 1 )]

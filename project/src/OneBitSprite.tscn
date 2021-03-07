@@ -3,6 +3,7 @@
 [ext_resource path="res://assets/monochrome_packed.png" type="Texture" id=1]
 
 [node name="Sprite" type="Sprite"]
+scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 vframes = 22
 hframes = 48
