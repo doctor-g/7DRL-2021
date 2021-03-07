@@ -10,7 +10,6 @@ export var enabled_text_color := Color.darkgray
 export var disabled_text_color := Color.lightgray
 
 var command 
-var xp := 0 setget _set_xp
 
 var _playable := false
 
@@ -24,7 +23,6 @@ func _ready():
 	else:
 		$Control/Title.text = command.name
 		$Control/LevelLabel.text = "?" if command.get("level") == null else str(command.get("level"))
-	_set_xp(0) # Trigger label update
 
 
 func update_playability(game:Game) -> void:
@@ -40,11 +38,6 @@ func can_play(game:Game)->bool:
 func play(game:Game) -> void:
 	assert(can_play(game))
 	command.execute(game)
-	_set_xp(xp+1)
-
-
-func _set_xp(value):
-	xp = value
 
 
 func _on_Control_gui_input(event):
