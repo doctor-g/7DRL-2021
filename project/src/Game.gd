@@ -5,7 +5,7 @@ const _Tunnel := preload("res://src/Rooms/Tunnel.gd")
 
 var ap := 0
 var player := preload("res://src/Player.gd").new()
-var room = _Tunnel.new() setget _set_room
+var room setget _set_room
 
 var _deck = []
 var _discard = []
@@ -15,8 +15,8 @@ onready var _Card := load("res://src/Card.tscn")
 func _ready():
 	# Initialize UI
 	_update_ap_label()
-	_update_room_label()
 	$PlayerInfoPanel.init(player)
+	_set_room(_Tunnel.new())
 	
 	# Load the cards
 	var test = ["Armor", "Room", "Gold", "Monster", "Weapon", "Weapon", "Monster", "Weapon",
@@ -36,15 +36,15 @@ func count_items() -> int:
 	return $ItemSlot.get_child_count()
 
 
-func _set_room(value)->void:
-	room = value
-	_update_room_label()
+func _set_room(new_room)->void:
+	if room!=null:
+		$RoomInfoPanel.unbind_from(room)
+		new_room.monsters_played = room.monsters_played
+		new_room.items_played = room.items_played
+	room = new_room
+	$RoomInfoPanel.bind_to(room)	
 	_update_cards()
 
-
-func _update_room_label():
-	$RoomNameLabel.text = room.name
-	
 
 func _draw_hand():
 	for _i in range(0,5):
@@ -68,9 +68,10 @@ func add_card(card)->void:
 
 
 func add_monster(monster)->void:
-	assert($MonsterSlot.get_child_count()==0, "Can only have one monster")
+	assert(room.monsters_played < room.max_monsters)
 	$MonsterSlot.add_child(monster)
 	monster.connect("defeated", self, "_on_Monster_defeated", [monster], CONNECT_ONESHOT)
+	room.monsters_played += 1
 	_update_cards()
 	
 	
@@ -85,8 +86,9 @@ func _update_cards():
 
 	
 func add_item(item)->void:
-	assert($ItemSlot.get_child_count()==0, "Can only have one item")
+	assert(room.items_played < room.max_items)
 	$ItemSlot.add_child(item)
+	room.items_played += 1
 	_update_cards()
 
 

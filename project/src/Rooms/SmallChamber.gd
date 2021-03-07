@@ -1,9 +1,5 @@
-extends Node
-
-var max_monsters := 1
-var max_items := 1
+extends "res://src/Rooms/Room.gd"
 
 
-func _init():
+func _init().(1,1):
 	name = "Small Chamber"
-

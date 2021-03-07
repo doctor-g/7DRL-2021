@@ -5,7 +5,9 @@ func _init():
 
 
 func can_play(game:Game) -> bool:
-	return game.room.name == "Tunnel"
+	return game.room.name == "Tunnel" \
+		and game.room.monsters_played == 0 \
+		and game.room.items_played == 0
 
 
 func execute(game:Game) -> void:

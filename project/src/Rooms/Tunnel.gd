@@ -1,7 +1,5 @@
-extends Node
+extends "res://src/Rooms/Room.gd"
 
-var max_monsters := 1
-var max_items := 0
 
-func _init():
+func _init().(1,0):
 	name = "Tunnel"
