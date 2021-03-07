@@ -3,6 +3,7 @@ extends Area2D
 signal pressed
 signal defeated
 
+var level : int
 var max_hp : int setget _set_max_hp
 var hp : int setget _set_hp
 var ac := 10

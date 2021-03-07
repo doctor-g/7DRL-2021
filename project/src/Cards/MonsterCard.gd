@@ -1,7 +1,7 @@
 extends Node
 
 var _monsters = {
-	0: [
+	1: [
 		# Name, HP, damage, ac, frame
 		[ "Rat", 2, "1d3", 10, 415 ],
 		[ "Snake", 2, "1d3+1", 11, 412 ],
@@ -19,9 +19,10 @@ func can_play(game:Game) -> bool:
 	
 
 func execute(game:Game) -> void:
-	var monster_data = _get_random_monster(0)
+	var monster_data = _get_random_monster(1)
 	var monster = preload("res://src/Monsters/Monster.tscn").instance()
 	monster.name = monster_data[0]
+	monster.level = 1
 	monster.max_hp = monster_data[1]
 	monster.damage = monster_data[2]
 	monster.ac = monster_data[3]

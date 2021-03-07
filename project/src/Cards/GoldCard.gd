@@ -9,7 +9,8 @@ func _init():
 
 
 func can_play(game:Game) -> bool:
-	return game.has_monster() and game.count_items() < game.room.max_items
+	return game.get_total_monster_levels() >= 1 \
+		and game.count_items() < game.room.max_items
 
 
 func execute(game:Game) -> void:

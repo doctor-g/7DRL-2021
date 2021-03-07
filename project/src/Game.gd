@@ -32,6 +32,14 @@ func count_monsters() -> int:
 	return $MonsterSlot.get_child_count()
 
 
+# Get the sum of all monster levels in the current room
+func get_total_monster_levels() ->int:
+	var sum := 0
+	for monster in $MonsterSlot.get_children():
+		sum += monster.level
+	return sum
+
+
 func count_items() -> int:
 	return $ItemSlot.get_child_count()
 
