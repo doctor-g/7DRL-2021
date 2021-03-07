@@ -40,31 +40,31 @@ __meta__ = {
 }
 
 [node name="MonsterSlot" type="Node2D" parent="."]
-position = Vector2( 197.553, 85.3071 )
+position = Vector2( 80.685, 85.3071 )
 
 [node name="ItemSlot" type="Node2D" parent="."]
-position = Vector2( 478.576, 85.3071 )
+position = Vector2( 232.854, 83.8088 )
 
 [node name="DoorSlot" type="Node2D" parent="."]
-position = Vector2( 715.896, 85.3071 )
+position = Vector2( 470.174, 83.8088 )
 
 [node name="Door" parent="DoorSlot" instance=ExtResource( 2 )]
 
 [node name="CardsDoneButton" type="Button" parent="."]
-margin_left = 966.44
-margin_top = 499.495
-margin_right = 1012.44
-margin_bottom = 519.495
+margin_left = 705.735
+margin_top = 477.02
+margin_right = 751.735
+margin_bottom = 497.02
 text = "Done"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ActionsDoneButton" type="Button" parent="."]
-margin_left = 966.44
-margin_top = 561.231
-margin_right = 1012.44
-margin_bottom = 581.231
+margin_left = 705.735
+margin_top = 538.756
+margin_right = 751.735
+margin_bottom = 558.756
 disabled = true
 text = "Done"
 __meta__ = {
@@ -72,13 +72,13 @@ __meta__ = {
 }
 
 [node name="PlayerInfoPanel" parent="." instance=ExtResource( 3 )]
-margin_left = 819.67
-margin_top = 1.75459
-margin_right = 1022.59
-margin_bottom = 390.1
+margin_left = 591.927
+margin_top = 4.7512
+margin_right = 794.847
+margin_bottom = 393.097
 
 [node name="RoomInfoPanel" parent="." instance=ExtResource( 4 )]
-margin_right = 814.0
+margin_right = 568.0
 margin_bottom = 28.0
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
 [connection signal="pressed" from="ActionsDoneButton" to="." method="_on_ActionsDoneButton_pressed"]
