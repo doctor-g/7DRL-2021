@@ -41,3 +41,9 @@ margin_top = 54.0
 margin_right = 1010.0
 margin_bottom = 68.0
 text = "Weapon: XYZ"
+
+[node name="ArmorLabel" type="Label" parent="VBoxContainer"]
+margin_top = 72.0
+margin_right = 1010.0
+margin_bottom = 86.0
+text = "Armor: XYZ"

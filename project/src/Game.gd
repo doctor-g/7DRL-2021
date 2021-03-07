@@ -19,8 +19,8 @@ func _ready():
 	$PlayerInfoPanel.init(player)
 	
 	# Load the cards
-	var test = ["SmallChamber.gd", "Gold.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd", "Weapon.gd",
-	 "Weapon.gd", "Goblin.gd", "Weapon.gd"]
+	var test = ["Armor.gd", "SmallChamber.gd", "Gold.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd", "Weapon.gd",
+	 "Weapon.gd", "Goblin.gd"]
 	for script in test:
 		var card = _Card.instance()
 		card.command = load("res://src/Cards/%s" % script).new()
