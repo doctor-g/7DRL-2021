@@ -1,9 +1,7 @@
-extends Node
-
-var level := 1
+extends "res://src/Card.gd"
 
 func _init():
-	name = "Small Chamber"
+	title = "Small Chamber"
 
 
 func can_play(game:Game) -> bool:
@@ -12,5 +10,5 @@ func can_play(game:Game) -> bool:
 		and game.room.items_played == 0
 
 
-func execute(game:Game) -> void:
+func play(game:Game) -> void:
 	game.room = load("res://src/Rooms/SmallChamber.gd").new()

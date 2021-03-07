@@ -1,4 +1,4 @@
-extends Node
+extends "res://src/Card.gd"
 
 var _weapons = {
 	1: [
@@ -13,11 +13,9 @@ var _weapons = {
 	]
 }
 
-var level := 1
-
 
 func _init():
-	name = "Weapon"
+	title = "Weapon"
 
 
 func can_play(game:Game) -> bool:
@@ -25,8 +23,8 @@ func can_play(game:Game) -> bool:
 		and game.room.items_played < game.room.max_items
 
 
-func execute(game:Game) -> void:
-	var weapon_data = _get_random_weapon(level)
+func play(game:Game) -> void:
+	var weapon_data = _get_random(_weapons)
 	var weapon = preload("res://src/Items/Item.tscn").instance()
 	weapon.set_script(load("res://src/Items/Weapon.gd"))
 	weapon.name = weapon_data[0]	
@@ -34,7 +32,3 @@ func execute(game:Game) -> void:
 	weapon.frame = weapon_data[2]	
 	game.add_item(weapon)
 
-
-func _get_random_weapon(lev:int) -> Array:
-	var options : Array = _weapons[lev]
-	return options[randi() % options.size()]

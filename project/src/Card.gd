@@ -1,5 +1,4 @@
 extends Area2D
-tool
 
 signal played
 
@@ -9,20 +8,16 @@ export var disabled_bg_color := Color.darkgray
 export var enabled_text_color := Color.darkgray
 export var disabled_text_color := Color.lightgray
 
-var command 
+var title : String
+var level := 1
 
 var _playable := false
 
 onready var _background = $Control/Background
 
 func _ready():
-	if command == null:
-		print("Command should not be null, but maybe you're just testing something.")
-		$Control/Title.text = "Test Card"
-		$Control/LevelLabel.text = "?"
-	else:
-		$Control/Title.text = command.name
-		$Control/LevelLabel.text = "?" if command.get("level") == null else str(command.get("level"))
+	$Control/Title.text = title
+	$Control/LevelLabel.text = str(level)
 
 
 func update_playability(game:Game) -> void:
@@ -31,16 +26,22 @@ func update_playability(game:Game) -> void:
 	$Control/Title.add_color_override("font_color", enabled_text_color if _playable else disabled_text_color)
 
 
-func can_play(game:Game)->bool:
-	return command.can_play(game)
+func can_play(_game:Game)->bool:
+	assert(false, "Subclasses must override this")
+	return false
 	
 
-func play(game:Game) -> void:
-	assert(can_play(game))
-	command.execute(game)
+func play(_game:Game) -> void:
+	assert(false, "Subclasses must override this")
 
 
 func _on_Control_gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed() and _playable:
 		emit_signal("played")
 
+
+# Utility for subclasses to get a random thing from a structured map of arrays
+# such as {1: [ [x], [y] ] }
+func _get_random(map):
+	var options : Array = map[level]
+	return options[randi() % options.size()]

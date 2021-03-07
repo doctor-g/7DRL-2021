@@ -31,7 +31,7 @@ func _ready():
 	 "Weapon", "Monster"]
 	for script in test:
 		var card = _Card.instance()
-		card.command = load("res://src/Cards/%sCard.gd" % script).new()
+		card.set_script(load("res://src/Cards/%sCard.gd" % script))
 		_deck.append(card)
 	_draw_hand()
 

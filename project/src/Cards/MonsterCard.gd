@@ -1,4 +1,4 @@
-extends Node
+extends "res://src/Card.gd"
 
 var _monsters = {
 	1: [
@@ -14,10 +14,8 @@ var _monsters = {
 	]
 }
 
-var level := 1
-
 func _init():
-	name = "Monster"
+	title = "Monster"
 
 
 func can_play(game:Game) -> bool:
@@ -25,8 +23,8 @@ func can_play(game:Game) -> bool:
 		and game.room.monsters_played < game.room.max_monsters
 	
 
-func execute(game:Game) -> void:
-	var monster_data = _get_random_monster(1)
+func play(game:Game) -> void:
+	var monster_data = _get_random(_monsters)
 	var monster = preload("res://src/Monsters/Monster.tscn").instance()
 	monster.name = monster_data[0]
 	monster.level = 1
@@ -35,8 +33,3 @@ func execute(game:Game) -> void:
 	monster.ac = monster_data[3]
 	monster.frame = monster_data[4]
 	game.add_monster(monster)
-
-
-func _get_random_monster(lev:int)->Array:
-	var options : Array = _monsters[lev]
-	return options[randi()%options.size()]
