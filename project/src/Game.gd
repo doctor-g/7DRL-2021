@@ -19,11 +19,11 @@ func _ready():
 	$PlayerInfoPanel.init(player)
 	
 	# Load the cards
-	var test = ["Armor.gd", "SmallChamber.gd", "Gold.gd", "Goblin.gd", "Weapon.gd", "Weapon.gd", "Goblin.gd", "Weapon.gd",
-	 "Weapon.gd", "Goblin.gd"]
+	var test = ["Armor", "Room", "Gold", "Monster", "Weapon", "Weapon", "Monster", "Weapon",
+	 "Weapon", "Monster"]
 	for script in test:
 		var card = _Card.instance()
-		card.command = load("res://src/Cards/%s" % script).new()
+		card.command = load("res://src/Cards/%sCard.gd" % script).new()
 		_deck.append(card)
 	_draw_hand()
 
@@ -159,7 +159,7 @@ func _on_Monster_attacked(monster)->void:
 func _on_Item_looted(item)->void:
 	if ap > 0:
 		item.pickup(player)
-		item.queue_free()
+		item.get_parent().remove_child(item)
 		ap -= 1
 		
 		item.disconnect("pressed", self, "_on_Item_looted")
@@ -187,7 +187,8 @@ func _do_all_monster_attack():
 		var roll := Dice.roll("d20")
 		var message := "You are attacked by the %s (%d). " % [monster.name, roll]
 		if roll >= player.ac:
-			print(message + "It hits!")
-			player.hp -= 2
+			var damage = Dice.roll(monster.damage)
+			print(message + "It hits for %d!" % damage)
+			player.hp -= damage
 		else:
 			print(message + "It misses!")

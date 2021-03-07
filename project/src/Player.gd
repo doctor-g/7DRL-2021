@@ -10,10 +10,28 @@ signal ac_changed
 
 var max_hp := 10
 var hp := max_hp setget _set_hp
-var weapon = load("res://src/Weapons/BareHands.gd").new() setget _set_weapon
-var armor = load("res://src/Armor/PeasantClothes.gd").new()  setget _set_armor
+var weapon = _make_starting_weapon() setget _set_weapon
+var armor = _make_starting_armor() setget _set_armor
 var gold := 0 setget _set_gold
 var ac := 10 setget _set_ac
+
+
+func _make_starting_armor():
+	var rags = preload("res://src/Items/Item.tscn").instance()
+	rags.set_script(load("res://src/Items/Armor.gd"))
+	rags.ac_bonus = 0
+	rags.frame = 85
+	rags.name = "Peasant Rags"
+	return rags
+
+
+func _make_starting_weapon():
+	var fists = preload("res://src/Items/Item.tscn").instance()
+	fists.set_script(load("res://src/Items/Weapon.gd"))
+	fists.name = "Bare Hands"
+	fists.damage = "1d2"
+	fists.frame = 89
+	return fists
 
 
 func _set_hp(value):
