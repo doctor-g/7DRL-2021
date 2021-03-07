@@ -7,7 +7,7 @@ func _init():
 	_regex.compile("(\\d+)?d(\\d+)([\\+\\-]\\d+)?")
 
 
-func roll(dice:String):
+func roll(dice:String) -> int:
 	var result := _regex.search(dice)
 	
 	var number := 1 if result.get_string(1) == "" else int(result.get_string(1))

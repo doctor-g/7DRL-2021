@@ -118,8 +118,7 @@ func _update_ap_label() -> void:
 
 func _on_ActionsDoneButton_pressed():
 	if has_monster():
-		print("The goblin strikes you!")
-		player.hp -= 2
+		_do_all_monster_attack()
 	_finish_action_phase()
 
 
@@ -145,8 +144,14 @@ func has_loot() -> bool:
 
 func _on_Monster_attacked(monster)->void:
 	if ap > 0:
-		var damage : int = player.weapon.compute_damage()
-		monster.hp -= damage
+		var roll := Dice.roll("d20")
+		var message := "You attack the %s (%d). " % [monster.name, roll]
+		if roll >= monster.ac:
+			var damage : int = player.weapon.compute_damage()
+			monster.hp -= damage
+			print("%sYou hit for %d damage!" % [message, damage])
+		else:
+			print(message + "You missed.")
 		ap -= 1
 		_update_ap_label()
 
@@ -179,5 +184,10 @@ func _on_Door_pressed():
 
 func _do_all_monster_attack():
 	for monster in $MonsterSlot.get_children():
-		print("The %s attacks you!" % monster.name)
-		player.hp -= 2
+		var roll := Dice.roll("d20")
+		var message := "You are attacked by the %s (%d). " % [monster.name, roll]
+		if roll >= player.ac:
+			print(message + "It hits!")
+			player.hp -= 2
+		else:
+			print(message + "It misses!")

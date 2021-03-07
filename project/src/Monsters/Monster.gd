@@ -3,8 +3,9 @@ extends Area2D
 signal pressed
 signal defeated
 
-var max_hp := 5
+var max_hp := 3
 var hp := max_hp setget _set_hp
+var ac := 10
 
 func _ready():
 	_update_hp_label()

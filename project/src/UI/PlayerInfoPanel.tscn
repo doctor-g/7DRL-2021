@@ -21,14 +21,23 @@ margin_right = 1010.0
 margin_bottom = 14.0
 text = "HP: X/Y"
 
-[node name="GoldLabel" type="Label" parent="VBoxContainer"]
+[node name="ACLabel" type="Label" parent="VBoxContainer"]
 margin_top = 18.0
 margin_right = 1010.0
 margin_bottom = 32.0
-text = "Gold: X"
+text = "AC: ZZ"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="WeaponLabel" type="Label" parent="VBoxContainer"]
+[node name="GoldLabel" type="Label" parent="VBoxContainer"]
 margin_top = 36.0
 margin_right = 1010.0
 margin_bottom = 50.0
+text = "Gold: X"
+
+[node name="WeaponLabel" type="Label" parent="VBoxContainer"]
+margin_top = 54.0
+margin_right = 1010.0
+margin_bottom = 68.0
 text = "Weapon: XYZ"
