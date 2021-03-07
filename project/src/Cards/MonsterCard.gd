@@ -15,7 +15,8 @@ func _init():
 
 
 func can_play(game:Game) -> bool:
-	return game.count_monsters() < game.room.max_monsters and game.room.monsters_played < game.room.max_monsters
+	return game.count_monsters() < game.room.max_monsters \
+		and game.room.monsters_played < game.room.max_monsters
 	
 
 func execute(game:Game) -> void:

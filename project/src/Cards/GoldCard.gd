@@ -10,7 +10,7 @@ func _init():
 
 func can_play(game:Game) -> bool:
 	return game.get_total_monster_levels() >= 1 \
-		and game.count_items() < game.room.max_items
+		and game.room.items_played < game.room.max_items
 
 
 func execute(game:Game) -> void:

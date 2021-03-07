@@ -1,24 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Game.gd" type="Script" id=1]
 [ext_resource path="res://src/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/PlayerInfoPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/UI/RoomInfoPanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/PhasePanel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/UI/CardPanel.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
-}
-
-[node name="CardBox" type="HBoxContainer" parent="."]
-margin_top = 415.311
-margin_right = 1024.0
-margin_bottom = 455.311
-custom_constants/separation = 20
-__meta__ = {
-"_edit_use_anchors_": false
 }
 
 [node name="MonsterSlot" type="Node2D" parent="."]
@@ -33,22 +25,11 @@ position = Vector2( 470.174, 83.8088 )
 [node name="Door" parent="DoorSlot" instance=ExtResource( 2 )]
 
 [node name="CardsDoneButton" type="Button" parent="."]
-margin_left = 705.735
-margin_top = 477.02
-margin_right = 751.735
-margin_bottom = 497.02
-text = "Done"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ActionsDoneButton" type="Button" parent="."]
-margin_left = 705.735
-margin_top = 538.756
-margin_right = 751.735
-margin_bottom = 558.756
-disabled = true
-text = "Done"
+margin_left = 356.006
+margin_top = 557.111
+margin_right = 493.006
+margin_bottom = 577.111
+text = "Ready to Adventure"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -68,5 +49,12 @@ margin_left = 24.0
 margin_top = 370.0
 margin_right = 562.0
 margin_bottom = 386.0
+
+[node name="CardPanel" parent="." instance=ExtResource( 6 )]
+anchor_top = 1.0
+margin_left = 1.0
+margin_top = 400.0
+margin_right = 801.0
+margin_bottom = 538.0
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
-[connection signal="pressed" from="ActionsDoneButton" to="." method="_on_ActionsDoneButton_pressed"]
+[connection signal="done_pressed" from="PhasePanel" to="." method="_on_PhasePanel_done_pressed"]

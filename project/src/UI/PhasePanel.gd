@@ -1,5 +1,9 @@
 extends Control
 
+signal done_pressed
+
+onready var _ap_label := $AdventureBox/ApLabel
+
 
 func bind_to(game):
 	game.connect("ap_changed", self, "_on_ap_changed")
@@ -8,9 +12,13 @@ func bind_to(game):
 
 
 func _on_ap_changed(ap : int) -> void:
-	$ApLabel.text = "AP: %d" % ap
+	_ap_label.text = "AP: %d" % ap
 
 
 func _on_phase_changed(phase) -> void:
-	$ApLabel.visible = phase == Game.ADVENTURE_PHASE
+	$AdventureBox.visible = phase == Game.ADVENTURE_PHASE
 	$PhaseLabel.text = "Build the Dungeon" if phase == Game.BUILD_PHASE else "Adventure"
+
+
+func _on_DoneButton_pressed():
+	emit_signal("done_pressed")

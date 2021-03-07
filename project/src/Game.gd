@@ -68,18 +68,14 @@ func _draw_hand():
 			_discard = []
 		var card = _deck.pop_front()
 		card.connect("played", self, "_on_Card_played", [card], CONNECT_ONESHOT)
-		add_card(card)
+		$CardPanel.add(card)
 	_update_cards()
 
 
 func _on_Card_played(card) -> void:
 	card.play(self)
-	$CardBox.remove_child(card)
+	$CardPanel.remove(card)
 	_discard.append(card)
-
-
-func add_card(card)->void:
-	$CardBox.add_child(card)
 
 
 func add_monster(monster)->void:
@@ -96,7 +92,7 @@ func _on_Monster_defeated(monster)->void:
 
 
 func _update_cards():
-	for card in $CardBox.get_children():
+	for card in $CardPanel.get_cards():
 		card.update_playability(self)
 
 	
@@ -108,13 +104,12 @@ func add_item(item)->void:
 
 
 func _on_CardsDoneButton_pressed():
-	for child in $CardBox.get_children():
+	for child in $CardPanel.get_cards():
 		_set_ap(ap + 1)
 		child.disconnect("played", self, "_on_Card_played")
-		$CardBox.remove_child(child)
+		$CardPanel.remove(child)
 		_discard.append(child)
 	$CardsDoneButton.disabled = true
-	$ActionsDoneButton.disabled = false
 	
 	# Listen for interactions
 	for monster in $MonsterSlot.get_children():
@@ -130,7 +125,7 @@ func has_monster():
 	return $MonsterSlot.get_child_count() > 0
 
 
-func _on_ActionsDoneButton_pressed():
+func _on_PhasePanel_done_pressed():
 	if has_monster():
 		_do_all_monster_attack()
 	_finish_action_phase()
@@ -147,7 +142,6 @@ func _finish_action_phase()->void:
 	# Clean up the phase
 	_set_ap(0)
 	$CardsDoneButton.disabled = false
-	$ActionsDoneButton.disabled = true
 	_draw_hand()
 	_set_phase(BUILD_PHASE)
 
@@ -179,6 +173,8 @@ func _on_Item_looted(item)->void:
 
 
 func _on_Door_pressed():
+	if ap == 0:
+		return
 	if has_monster():
 		_do_all_monster_attack()
 		_set_ap(ap-1)
