@@ -8,19 +8,12 @@ onready var _ac_label := $VBoxContainer/ACLabel
 
 func init(player):
 	# Set up connections
-	player.connect("hp_changed", self, "_on_Player_hp_changed", [player])
-	player.connect("weapon_changed", self, "_on_Player_weapon_changed", [player])
-	player.connect("armor_changed", self, "_on_Player_armor_changed", [player])
-	player.connect("gold_changed", self, "_on_Player_gold_changed", [player])
-	player.connect("ac_changed", self, "_on_Player_ac_changed", [player])
-	
-	# Trigger the handlers to force them to show the initial stats
-	_on_Player_hp_changed(player)
-	_on_Player_weapon_changed(player)
-	_on_Player_gold_changed(player)
-	_on_Player_ac_changed(player)
-	_on_Player_armor_changed(player)
-	
+	for property in ["hp","weapon","armor","gold","ac"]:
+		var signal_name = property + "_changed"
+		var handler = "_on_Player_" + signal_name
+		player.connect(signal_name, self, handler, [player])
+		call(handler, player)
+
 
 func _on_Player_hp_changed(player):
 	_hp_label.text = "HP: %d/%d" % [player.hp, player.max_hp]
