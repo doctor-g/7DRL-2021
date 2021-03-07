@@ -1,12 +1,19 @@
 class_name Game
 extends Node2D
 
-const _Tunnel := preload("res://src/Rooms/Tunnel.gd")
+signal ap_changed
+signal phase_changed
 
-var ap := 0
+const _Tunnel := preload("res://src/Rooms/Tunnel.gd")
+const PHASES = [ "Build", "Adventure" ]
+const BUILD_PHASE = PHASES[0]
+const ADVENTURE_PHASE = PHASES[1]
+
+var ap := 0 setget _set_ap
 var player := preload("res://src/Player.gd").new()
 var room setget _set_room
 
+var _phase : String = PHASES[0] setget _set_phase
 var _deck = []
 var _discard = []
 
@@ -14,8 +21,8 @@ onready var _Card := load("res://src/Card.tscn")
 
 func _ready():
 	# Initialize UI
-	_update_ap_label()
 	$PlayerInfoPanel.init(player)
+	$PhasePanel.bind_to(self)
 	_set_room(_Tunnel.new())
 	
 	# Load the cards
@@ -102,8 +109,7 @@ func add_item(item)->void:
 
 func _on_CardsDoneButton_pressed():
 	for child in $CardBox.get_children():
-		ap += 1
-		_update_ap_label()
+		_set_ap(ap + 1)
 		child.disconnect("played", self, "_on_Card_played")
 		$CardBox.remove_child(child)
 		_discard.append(child)
@@ -117,13 +123,11 @@ func _on_CardsDoneButton_pressed():
 		item.connect("pressed", self, "_on_Item_looted", [item])
 	$DoorSlot.get_child(0).connect("pressed", self, "_on_Door_pressed")
 	
+	_set_phase(ADVENTURE_PHASE)
+	
 	
 func has_monster():
 	return $MonsterSlot.get_child_count() > 0
-
-
-func _update_ap_label() -> void:
-	$HBoxContainer/APLabel.text = "AP: %d" % ap
 
 
 func _on_ActionsDoneButton_pressed():
@@ -141,11 +145,11 @@ func _finish_action_phase()->void:
 	$DoorSlot.get_child(0).disconnect("pressed", self, "_on_Door_pressed")
 	
 	# Clean up the phase
-	ap = 0
-	_update_ap_label()
+	_set_ap(0)
 	$CardsDoneButton.disabled = false
 	$ActionsDoneButton.disabled = true
-	_draw_hand()	
+	_draw_hand()
+	_set_phase(BUILD_PHASE)
 
 
 func has_loot() -> bool:
@@ -162,28 +166,22 @@ func _on_Monster_attacked(monster)->void:
 			print("%sYou hit for %d damage!" % [message, damage])
 		else:
 			print(message + "You missed.")
-		ap -= 1
-		_update_ap_label()
+		_set_ap(ap-1)
 
 
 func _on_Item_looted(item)->void:
 	if ap > 0:
 		item.pickup(player)
 		item.get_parent().remove_child(item)
-		ap -= 1
-		
+		_set_ap(ap-1)
 		item.disconnect("pressed", self, "_on_Item_looted")
-		
 		_do_all_monster_attack()
-		
-		_update_ap_label()
 
 
 func _on_Door_pressed():
 	if has_monster():
 		_do_all_monster_attack()
-		ap -= 1
-		_update_ap_label()
+		_set_ap(ap-1)
 	else:
 		for item in $ItemSlot.get_children():
 			$ItemSlot.remove_child(item)
@@ -202,3 +200,14 @@ func _do_all_monster_attack():
 			player.hp -= damage
 		else:
 			print(message + "It misses!")
+
+
+func _set_ap(value):
+	ap = value
+	emit_signal("ap_changed", ap)
+
+
+func _set_phase(value):
+	assert(PHASES.has(value))
+	_phase = value
+	emit_signal("phase_changed", _phase)

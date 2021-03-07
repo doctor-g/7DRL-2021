@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/PhasePanel.gd" type="Script" id=1]
+
+[node name="PhasePanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PhaseLabel" type="Label" parent="."]
+margin_right = 119.0
+margin_bottom = 14.0
+text = "Build the Dungeon"
+
+[node name="ApLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -33.0
+margin_bottom = 14.0
+text = "AP: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
