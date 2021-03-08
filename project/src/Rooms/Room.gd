@@ -23,3 +23,14 @@ func _set_monsters_played(value):
 func _set_items_played(value):
 	items_played = value
 	emit_signal("items_played_changed")
+
+
+func create_free_monster():
+	var monster = load("res://src/Monsters/Monster.tscn").instance()
+	monster.name = "Rat"
+	monster.level = 0
+	monster.max_hp = 1
+	monster.damage = 1
+	monster.ac = 10
+	monster.frame = 415
+	return monster

@@ -3,9 +3,9 @@ extends "res://src/Card.gd"
 var _monsters = {
 	1: [
 		# Name, HP, damage, ac, frame
-		[ "Rat", 2, "1d3", 10, 415 ],
-		[ "Snake", 2, "1d3+1", 11, 412 ],
-		[ "Bat", 1, "1d2", 12, 410 ]
+		[ "Goblin", 4, "1d4", 11, 121 ],
+		[ "Snake", 4, "1d3+1", 11, 412 ],
+		[ "Bat", 3, "1d2", 12, 410 ]
 	],
 	2: [
 		[ "Orc", 8, "1d6", 12, 457 ],

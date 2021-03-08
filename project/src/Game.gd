@@ -3,8 +3,9 @@ extends Control
 
 signal ap_changed
 signal phase_changed
+signal monster_added
+signal room_changed
 
-const _Tunnel := preload("res://src/Rooms/Tunnel.gd")
 const PHASES = [ "Build", "Adventure" ]
 const BUILD_PHASE = PHASES[0]
 const ADVENTURE_PHASE = PHASES[1]
@@ -12,6 +13,8 @@ const ADVENTURE_PHASE = PHASES[1]
 var ap := 0 setget _set_ap
 var player := preload("res://src/Player.gd").new()
 var room setget _set_room
+
+var _Tunnel := load("res://src/Rooms/Tunnel.gd")
 
 var _phase : String = PHASES[0] setget _set_phase
 var _deck = []
@@ -30,6 +33,7 @@ func _ready():
 	$PlayerInfoPanel.init(player)
 	$PhasePanel.bind_to(self)
 	$ShopPanel.bind_to(self)
+	$CardPanel.bind_to(self)
 	_set_room(_Tunnel.new())
 	
 	# Load the cards
@@ -93,7 +97,8 @@ func _set_room(new_room)->void:
 	if room!=null:
 		$RoomInfoPanel.unbind_from(room)
 	room = new_room
-	$RoomInfoPanel.bind_to(room)	
+	$RoomInfoPanel.bind_to(room)
+	emit_signal("room_changed")
 	_update_cards()
 
 
@@ -126,6 +131,7 @@ func add_monster(monster)->void:
 	room.monsters_played += 1
 	_update_cards()
 	Log.log("You summon a %s." % monster.name)
+	emit_signal("monster_added")
 
 
 func _add_to_next_available_slot(parent:Node2D, thing:Node)->void:
@@ -280,3 +286,8 @@ func _set_phase(value):
 	assert(PHASES.has(value))
 	_phase = value
 	emit_signal("phase_changed", _phase)
+
+
+func _on_CardPanel_free_monster_added():
+	var monster = room.create_free_monster()
+	add_monster(monster)
