@@ -13,4 +13,3 @@ func get_name() -> String:
 
 func compute_damage():
 	return Dice.roll(damage)
-

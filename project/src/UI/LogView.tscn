@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/LogView.gd" type="Script" id=1]
+
+[node name="LogView" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="History" type="TextEdit" parent="."]
+visible = false
+margin_top = 313.47
+margin_right = 600.0
+margin_bottom = 563.47
+readonly = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -34.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 793.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExpandButton" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_right = 19.0
+margin_bottom = 20.0
+toggle_mode = true
+text = "^"
+
+[node name="LatestMessageLabel" type="Label" parent="PanelContainer/HBoxContainer"]
+margin_left = 23.0
+margin_top = 3.0
+margin_right = 88.0
+margin_bottom = 17.0
+text = "Log ready."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="toggled" from="PanelContainer/HBoxContainer/ExpandButton" to="." method="_on_ExpandButton_toggled"]

@@ -1,5 +1,5 @@
 class_name Game
-extends Node2D
+extends Control
 
 signal ap_changed
 signal phase_changed
@@ -125,6 +125,7 @@ func add_monster(monster)->void:
 	monster.connect("defeated", self, "_on_Monster_defeated", [monster], CONNECT_ONESHOT)
 	room.monsters_played += 1
 	_update_cards()
+	Log.log("You summon a %s." % monster.name)
 
 
 func _add_to_next_available_slot(parent:Node2D, thing:Node)->void:
@@ -203,9 +204,9 @@ func _on_Monster_attacked(monster)->void:
 		if roll + player.strength >= monster.ac:
 			var damage : int = player.weapon.compute_damage() + player.strength
 			monster.hp -= damage
-			print("%sYou hit for %d damage!" % [message, damage])
+			Log.log("%sYou hit for %d damage!" % [message, damage])
 		else:
-			print(message + "You missed.")
+			Log.log(message + "You missed.")
 		_set_ap(ap-1)
 
 
@@ -213,13 +214,12 @@ func _on_Item_looted(item)->void:
 	if ap > 0:
 		# If there are monsters, check dexterity.
 		if has_monster():
-			print("You try to grab the %s..." % item.name)
 			if Dice.roll("d20") + player.dexterity >= 10:
-				print("You got it!")
+				Log.log("You grab the %s." % item.name)
 				_pickup(item)
 			else:
-				print("You fumble and are attacked!")
-				_do_all_monster_attack()
+				var message = "You try to grab the %s but are attacked! " % item.name
+				_do_all_monster_attack(message)
 		# If there are no monsters, just pick it up.
 		else:
 			_pickup(item)
@@ -236,14 +236,12 @@ func _on_Door_pressed():
 	if ap == 0:
 		return
 	if has_monster():
-		var roll := Dice.roll("d20")		
-		print("You try to escape (%d + %d)" % [roll, player.dexterity])
+		var roll := Dice.roll("d20")
 		if roll >= 10:
-			print("Success!")
+			Log.log("You escape the room!")
 			_exit_room()
 		else:
-			print("Failure!")
-			_do_all_monster_attack()
+			_do_all_monster_attack("You try to escape the room but are caught.")
 			_set_ap(ap-1)
 	else:
 		_exit_room()
@@ -258,16 +256,19 @@ func _exit_room():
 	_finish_action_phase()
 
 
-func _do_all_monster_attack():
+# All the monsters attack.
+# The optional parameter is a stub message that will be expanded upon
+# in the log.
+func _do_all_monster_attack(message : String = ""):
 	for monster in get_monsters(): 
 		var roll := Dice.roll("d20")
-		var message := "You are attacked by the %s (%d). " % [monster.name, roll]
 		if roll >= player.ac:
 			var damage = Dice.roll(monster.damage)
-			print(message + "It hits for %d!" % damage)
+			message += "The %s hits for %d. " % [monster.name, damage]
 			player.hp -= damage
 		else:
-			print(message + "It misses!")
+			message += "The %s misses. "
+	Log.log(message)
 
 
 func _set_ap(value):

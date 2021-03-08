@@ -19,11 +19,8 @@ func roll(dice:String) -> int:
 		modifier = int(expression.substr(1))
 		modifier *= 1 if expression[0]=="+" else -1
 	
-	print("Modifier is " + str(modifier))
-	
 	var sum := 0
 	for _i in range(0,number):
 		var roll := randi() % sides + 1
 		sum += roll + modifier
-	print("Result is %d" % sum)
 	return sum

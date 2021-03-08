@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "Control",
 "class": "Game",
 "language": "GDScript",
 "path": "res://src/Game.gd"
@@ -27,6 +27,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Dice="*res://src/Dice.gd"
+Log="*res://src/Log.gd"
 
 [debug]
 

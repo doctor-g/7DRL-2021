@@ -17,3 +17,4 @@ func can_play(game:Game) -> bool:
 
 func play(game:Game) -> void:
 	game.room = _rooms[level].new()
+	Log.log("You expand the tunnel into a %s." % game.room.name)

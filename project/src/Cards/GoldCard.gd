@@ -20,3 +20,4 @@ func play(game:Game) -> void:
 	item.amount = Dice.roll(_range[level])
 	item.frame = 803
 	game.add_item(item)
+	Log.log("You summon a pile of gold.")
