@@ -20,6 +20,9 @@ var _discard = []
 onready var _Card := load("res://src/Card.tscn")
 
 func _ready():
+	# Initialize player
+	player.connect("hp_changed", self, "_on_Player_hp_changed")
+	
 	# Initialize UI
 	$PlayerInfoPanel.init(player)
 	$PhasePanel.bind_to(self)
@@ -27,13 +30,20 @@ func _ready():
 	_set_room(_Tunnel.new())
 	
 	# Load the cards
-	var test = ["Armor", "Room", "Gold", "Monster", "Weapon", "Weapon", "Monster", "Weapon",
-	 "Weapon", "Monster"]
+	var test = [ "Armor", "Room", "Gold", "Monster", "Weapon",
+				 "Armor", "Room", "Gold", "Monster", "Weapon" ]
 	for script in test:
 		var card = _Card.instance()
 		card.set_script(load("res://src/Cards/%sCard.gd" % script))
 		_deck.append(card)
+	
+	_deck.shuffle()
 	_draw_hand()
+
+
+func _on_Player_hp_changed()->void:
+	if player.hp <= 0:
+		$GameOverPopup.show_modal(true)
 
 
 func count_monsters() -> int:
@@ -88,6 +98,7 @@ func _draw_hand():
 	for _i in range(0,5):
 		if _deck.size() == 0:
 			_deck = _discard.duplicate()
+			_deck.shuffle()
 			_discard = []
 		var card = _deck.pop_front()
 		card.connect("played", self, "_on_Card_played", [card], CONNECT_ONESHOT)
@@ -211,9 +222,9 @@ func _on_Door_pressed():
 		_do_all_monster_attack()
 		_set_ap(ap-1)
 	else:
-		for item in $ItemSlot.get_children():
-			$ItemSlot.remove_child(item)
+		for item in get_items():
 			item.disconnect("pressed", self, "_on_Item_looted")
+			item.queue_free()			
 		_set_room(_Tunnel.new())
 		_finish_action_phase()
 
