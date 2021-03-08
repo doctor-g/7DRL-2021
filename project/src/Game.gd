@@ -20,7 +20,10 @@ var _discard = []
 onready var _Card := load("res://src/Card.tscn")
 
 func _ready():
+	randomize()
+	
 	# Initialize player
+	player.randomize_attributes(3)
 	player.connect("hp_changed", self, "_on_Player_hp_changed")
 	
 	# Initialize UI
@@ -195,10 +198,10 @@ func _finish_action_phase()->void:
 
 func _on_Monster_attacked(monster)->void:
 	if ap > 0:
-		var roll := Dice.roll("d20")
-		var message := "You attack the %s (%d). " % [monster.name, roll]
-		if roll >= monster.ac:
-			var damage : int = player.weapon.compute_damage()
+		var roll := Dice.roll("d20") 
+		var message := "You attack the %s (%d+%d). " % [monster.name, roll, player.strength]
+		if roll + player.strength >= monster.ac:
+			var damage : int = player.weapon.compute_damage() + player.strength
 			monster.hp -= damage
 			print("%sYou hit for %d damage!" % [message, damage])
 		else:
@@ -208,25 +211,51 @@ func _on_Monster_attacked(monster)->void:
 
 func _on_Item_looted(item)->void:
 	if ap > 0:
-		item.pickup(player)
-		item.get_parent().remove_child(item)
-		_set_ap(ap-1)
-		item.disconnect("pressed", self, "_on_Item_looted")
-		_do_all_monster_attack()
+		# If there are monsters, check dexterity.
+		if has_monster():
+			print("You try to grab the %s..." % item.name)
+			if Dice.roll("d20") + player.dexterity >= 10:
+				print("You got it!")
+				_pickup(item)
+			else:
+				print("You fumble and are attacked!")
+				_do_all_monster_attack()
+		# If there are no monsters, just pick it up.
+		else:
+			_pickup(item)
+
+
+func _pickup(item):
+	item.pickup(player)
+	item.get_parent().remove_child(item)
+	_set_ap(ap-1)
+	item.disconnect("pressed", self, "_on_Item_looted")
 
 
 func _on_Door_pressed():
 	if ap == 0:
 		return
 	if has_monster():
-		_do_all_monster_attack()
-		_set_ap(ap-1)
+		var roll := Dice.roll("d20")		
+		print("You try to escape (%d + %d)" % [roll, player.dexterity])
+		if roll >= 10:
+			print("Success!")
+			_exit_room()
+		else:
+			print("Failure!")
+			_do_all_monster_attack()
+			_set_ap(ap-1)
 	else:
-		for item in get_items():
-			item.disconnect("pressed", self, "_on_Item_looted")
-			item.queue_free()			
-		_set_room(_Tunnel.new())
-		_finish_action_phase()
+		_exit_room()
+
+
+func _exit_room():
+	for monster in get_monsters():
+		monster.queue_free()
+	for item in get_items():
+		item.queue_free()
+	_set_room(_Tunnel.new())
+	_finish_action_phase()
 
 
 func _do_all_monster_attack():

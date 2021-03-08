@@ -8,7 +8,7 @@ onready var _ac_label := $VBoxContainer/ACLabel
 
 func init(player):
 	# Set up connections
-	for property in ["hp","weapon","armor","gold","ac"]:
+	for property in ["hp","weapon","armor","gold","ac","attribute"]:
 		var signal_name = property + "_changed"
 		var handler = "_on_Player_" + signal_name
 		player.connect(signal_name, self, handler, [player])
@@ -33,3 +33,13 @@ func _on_Player_ac_changed(player):
 
 func _on_Player_armor_changed(player):
 	_armor_label.text = "Armor: %s" % player.armor.get_name()
+
+
+func _on_Player_attribute_changed(player):
+	$VBoxContainer/HBoxContainer/StrengthLabel.text = "Str:%s" % _format(player.strength)
+	$VBoxContainer/HBoxContainer/DexterityLabel.text = "Dex:%s" % _format(player.dexterity)
+	$VBoxContainer/HBoxContainer/ConstitutionLabel.text = "Con:%s" % _format(player.constitution)
+
+
+func _format(value:int)->String:
+	return ("+%d" % value ) if value > 0 else str(value)
