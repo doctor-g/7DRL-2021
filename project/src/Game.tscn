@@ -90,6 +90,7 @@ position = Vector2( 250.033, 118.66 )
 position = Vector2( 318.898, 118.66 )
 
 [node name="GameOverPopup" parent="." instance=ExtResource( 8 )]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
