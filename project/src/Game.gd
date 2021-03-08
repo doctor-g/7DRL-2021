@@ -279,7 +279,7 @@ func _do_all_monster_attack(message : String = ""):
 			message += "The %s hits for %d. " % [monster.name, damage]
 			player.hp -= damage
 		else:
-			message += "The %s misses. "
+			message += "The %s misses. " % monster.name
 	Log.log(message)
 
 
