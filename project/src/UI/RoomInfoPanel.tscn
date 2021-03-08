@@ -13,7 +13,7 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1017.0
+margin_right = 793.0
 margin_bottom = 593.0
 custom_constants/separation = 12
 alignment = 1
@@ -22,22 +22,29 @@ __meta__ = {
 }
 
 [node name="NameLabel" type="Label" parent="HBoxContainer"]
-margin_left = 330.0
+margin_left = 164.0
 margin_top = 286.0
-margin_right = 409.0
+margin_right = 243.0
 margin_bottom = 300.0
 text = "Room Name"
 
 [node name="MonstersLabel" type="Label" parent="HBoxContainer"]
-margin_left = 421.0
+margin_left = 255.0
 margin_top = 286.0
-margin_right = 555.0
+margin_right = 389.0
 margin_bottom = 300.0
 text = "Monsters Played: X/Y"
 
 [node name="ItemsLabel" type="Label" parent="HBoxContainer"]
-margin_left = 567.0
+margin_left = 401.0
 margin_top = 286.0
-margin_right = 679.0
+margin_right = 513.0
 margin_bottom = 300.0
 text = "Items Played: X/Y"
+
+[node name="StableTurnsLabel" type="Label" parent="HBoxContainer"]
+margin_left = 525.0
+margin_top = 286.0
+margin_right = 621.0
+margin_bottom = 300.0
+text = "Stable Turns: N"

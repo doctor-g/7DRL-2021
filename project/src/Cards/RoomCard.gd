@@ -10,11 +10,16 @@ func _init():
 
 
 func can_play(game:Game) -> bool:
-	return game.room.name == "Tunnel" \
-		and game.room.monsters_played == 0 \
-		and game.room.items_played == 0
+	return game.room.level < level \
+		and game.room.items_played <= game.room.max_items \
+		and game.room.monsters_played <= game.room.max_monsters
 
 
 func play(game:Game) -> void:
-	game.room = _rooms[level].new()
-	Log.log("You expand the tunnel into a %s." % game.room.name)
+	var new_room = _rooms[level].new()
+	new_room.level = level
+	new_room.items_played = game.room.items_played
+	new_room.monsters_played = game.room.monsters_played
+	Log.log("You expand the %s into a %s." % [game.room.name, new_room.name])
+	game.room = new_room
+	

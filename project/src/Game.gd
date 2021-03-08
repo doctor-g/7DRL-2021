@@ -19,6 +19,7 @@ var _Tunnel := load("res://src/Rooms/Tunnel.gd")
 var _phase : String = PHASES[0] setget _set_phase
 var _deck = []
 var _discard = []
+var _room_changed_this_turn := false
 
 onready var _Card := load("res://src/Card.tscn")
 
@@ -201,12 +202,22 @@ func _finish_action_phase()->void:
 		item.disconnect("pressed", self, "_on_Item_looted")
 	$DoorSlot.get_child(0).disconnect("pressed", self, "_on_Door_pressed")
 	
+	# Handle tremors
+	# Only take damage if we were already at zero stable turns remaining.
+	if not _room_changed_this_turn:
+		if room.stable_turns <= 0:
+			var dmg = Dice.roll(room.damage)
+			Log.log("The cavern trembles! You take %d damage." % dmg)
+			player.hp -= dmg
+		room.stable_turns -= 1
+	
 	# Clean up the phase
 	_set_ap(0)
 	$CardsDoneButton.disabled = false
 	$ShopPanel.visible = false
 	_draw_hand()
 	_set_phase(BUILD_PHASE)
+	_room_changed_this_turn = false
 
 
 func _on_Monster_attacked(monster)->void:
@@ -260,6 +271,7 @@ func _on_Door_pressed():
 
 
 func _exit_room():
+	_room_changed_this_turn = true
 	for monster in get_monsters():
 		monster.queue_free()
 	for item in get_items():
