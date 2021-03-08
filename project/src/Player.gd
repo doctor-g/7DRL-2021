@@ -17,7 +17,7 @@ var dexterity := 0 setget _set_dexterity
 var constitution := 0 setget _set_constitution
 var intelligence := 0 setget _set_intelligence
 
-var max_hp := 1 + constitution
+var max_hp := 10 + constitution
 var hp := max_hp setget _set_hp
 var weapon = _make_starting_weapon() setget _set_weapon
 var armor = _make_starting_armor() setget _set_armor
