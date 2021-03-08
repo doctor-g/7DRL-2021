@@ -3,6 +3,7 @@
 [ext_resource path="res://src/UI/GameOverPopup.gd" type="Script" id=1]
 
 [node name="GameOverPopup" type="Popup"]
+visible = true
 margin_right = 300.0
 margin_bottom = 300.0
 popup_exclusive = true
@@ -30,15 +31,23 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
-margin_top = 120.0
+margin_top = 107.0
 margin_right = 286.0
-margin_bottom = 134.0
+margin_bottom = 121.0
 text = "You have perished."
+align = 1
+
+[node name="XPLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_top = 133.0
+margin_right = 286.0
+margin_bottom = 147.0
+text = "XP: 123"
+align = 1
 
 [node name="PlayAgainButton" type="Button" parent="PanelContainer/VBoxContainer"]
-margin_top = 146.0
+margin_top = 159.0
 margin_right = 286.0
-margin_bottom = 166.0
+margin_bottom = 179.0
 text = "Play Again"
 __meta__ = {
 "_edit_use_anchors_": false

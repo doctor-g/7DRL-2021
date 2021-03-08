@@ -50,6 +50,7 @@ func _ready():
 
 func _on_Player_hp_changed()->void:
 	if player.hp <= 0:
+		$GameOverPopup.prepare(player)
 		$GameOverPopup.show_modal(true)
 
 
@@ -143,6 +144,7 @@ func _add_to_next_available_slot(parent:Node2D, thing:Node)->void:
 		
 	
 func _on_Monster_defeated(monster)->void:
+	player.xp += 1 if monster.level == 0 else monster.level * 5
 	monster.queue_free()
 
 

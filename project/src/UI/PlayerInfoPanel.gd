@@ -5,10 +5,11 @@ onready var _weapon_label := $VBoxContainer/WeaponLabel
 onready var _armor_label := $VBoxContainer/ArmorLabel
 onready var _gold_label := $VBoxContainer/GoldLabel
 onready var _ac_label := $VBoxContainer/ACLabel
+onready var _xp_label := $VBoxContainer/XPLabel
 
 func init(player):
 	# Set up connections
-	for property in ["hp","weapon","armor","gold","ac","attribute"]:
+	for property in ["hp","weapon","armor","gold","ac","attribute", "xp"]:
 		var signal_name = property + "_changed"
 		var handler = "_on_Player_" + signal_name
 		player.connect(signal_name, self, handler, [player])
@@ -44,3 +45,7 @@ func _on_Player_attribute_changed(player):
 
 func _format(value:int)->String:
 	return ("+%d" % value ) if value > 0 else str(value)
+
+
+func _on_Player_xp_changed(player):
+	_xp_label.text = "XP: %d" % player.xp
