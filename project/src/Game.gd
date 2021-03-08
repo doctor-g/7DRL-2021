@@ -37,19 +37,43 @@ func _ready():
 
 
 func count_monsters() -> int:
-	return $MonsterSlot.get_child_count()
+	return _count_occupied_slots($Monsters)
+
+
+func _count_occupied_slots(node:Node2D):
+	var result := 0
+	for child in node.get_children():
+		if child.get_child_count() > 0:
+			result += 1
+	return result
 
 
 # Get the sum of all monster levels in the current room
 func get_total_monster_levels() ->int:
 	var sum := 0
-	for monster in $MonsterSlot.get_children():
+	for monster in get_monsters():
 		sum += monster.level
 	return sum
 
 
+func get_monsters()->Array:
+	return _get_slotted_things($Monsters)
+	
+
+func get_items()->Array:
+	return _get_slotted_things($Items)
+
+
+func _get_slotted_things(node:Node2D)->Array:
+	var array = []
+	for child in node.get_children():
+		if child.get_child_count() == 1:
+			array.append(child.get_child(0))
+	return array
+
+
 func count_items() -> int:
-	return $ItemSlot.get_child_count()
+	return _count_occupied_slots($Items)
 
 
 func _set_room(new_room)->void:
@@ -83,14 +107,21 @@ func add_to_discard(card):
 
 func add_monster(monster)->void:
 	assert(room.monsters_played < room.max_monsters)
-	$MonsterSlot.add_child(monster)
+	_add_to_next_available_slot($Monsters, monster)
 	monster.connect("defeated", self, "_on_Monster_defeated", [monster], CONNECT_ONESHOT)
 	room.monsters_played += 1
 	_update_cards()
-	
+
+
+func _add_to_next_available_slot(parent:Node2D, thing:Node)->void:
+	for child in parent.get_children():
+		if child.get_child_count() == 0:
+			child.add_child(thing)
+			return
+	assert("Out of slots!")
+		
 	
 func _on_Monster_defeated(monster)->void:
-	$MonsterSlot.remove_child(monster)
 	monster.queue_free()
 
 
@@ -101,7 +132,7 @@ func _update_cards():
 	
 func add_item(item)->void:
 	assert(room.items_played < room.max_items)
-	$ItemSlot.add_child(item)
+	_add_to_next_available_slot($Items, item)
 	room.items_played += 1
 	_update_cards()
 
@@ -115,9 +146,9 @@ func _on_CardsDoneButton_pressed():
 	$CardsDoneButton.disabled = true
 	
 	# Listen for interactions
-	for monster in $MonsterSlot.get_children():
+	for monster in get_monsters():
 		monster.connect("pressed", self, "_on_Monster_attacked", [monster])
-	for item in $ItemSlot.get_children():
+	for item in get_items():
 		item.connect("pressed", self, "_on_Item_looted", [item])
 	$DoorSlot.get_child(0).connect("pressed", self, "_on_Door_pressed")
 	
@@ -126,7 +157,7 @@ func _on_CardsDoneButton_pressed():
 	
 	
 func has_monster():
-	return $MonsterSlot.get_child_count() > 0
+	return count_monsters() > 0
 
 
 func _on_PhasePanel_done_pressed():
@@ -137,9 +168,9 @@ func _on_PhasePanel_done_pressed():
 
 func _finish_action_phase()->void:
 	# Disconnect signals
-	for monster in $MonsterSlot.get_children():
+	for monster in get_monsters():
 		monster.disconnect("pressed", self, "_on_Monster_attacked")
-	for item in $ItemSlot.get_children():
+	for item in get_items():
 		item.disconnect("pressed", self, "_on_Item_looted")
 	$DoorSlot.get_child(0).disconnect("pressed", self, "_on_Door_pressed")
 	
@@ -149,10 +180,6 @@ func _finish_action_phase()->void:
 	$ShopPanel.visible = false
 	_draw_hand()
 	_set_phase(BUILD_PHASE)
-
-
-func has_loot() -> bool:
-	return $ItemSlot.get_child_count() > 0
 
 
 func _on_Monster_attacked(monster)->void:
@@ -192,7 +219,7 @@ func _on_Door_pressed():
 
 
 func _do_all_monster_attack():
-	for monster in $MonsterSlot.get_children():
+	for monster in get_monsters(): 
 		var roll := Dice.roll("d20")
 		var message := "You are attacked by the %s (%d). " % [monster.name, roll]
 		if roll >= player.ac:

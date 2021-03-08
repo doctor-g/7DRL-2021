@@ -14,12 +14,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MonsterSlot" type="Node2D" parent="."]
-position = Vector2( 80.685, 85.3071 )
-
-[node name="ItemSlot" type="Node2D" parent="."]
-position = Vector2( 232.854, 83.8088 )
-
 [node name="DoorSlot" type="Node2D" parent="."]
 position = Vector2( 470.174, 83.8088 )
 
@@ -63,5 +57,33 @@ visible = false
 margin_top = 426.0
 margin_right = 800.0
 margin_bottom = 598.0
+
+[node name="Monsters" type="Node2D" parent="."]
+
+[node name="Slot1" type="Node2D" parent="Monsters"]
+position = Vector2( 58.2705, 64.6272 )
+
+[node name="Slot2" type="Node2D" parent="Monsters"]
+position = Vector2( 140.909, 65.6867 )
+
+[node name="Slot3" type="Node2D" parent="Monsters"]
+position = Vector2( 57.211, 113.363 )
+
+[node name="Slot4" type="Node2D" parent="Monsters"]
+position = Vector2( 141.968, 113.363 )
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Slot1" type="Node2D" parent="Items"]
+position = Vector2( 248.974, 62.5083 )
+
+[node name="Slot2" type="Node2D" parent="Items"]
+position = Vector2( 324.196, 62.5083 )
+
+[node name="Slot3" type="Node2D" parent="Items"]
+position = Vector2( 250.033, 118.66 )
+
+[node name="Slot4" type="Node2D" parent="Items"]
+position = Vector2( 318.898, 118.66 )
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
 [connection signal="done_pressed" from="PhasePanel" to="." method="_on_PhasePanel_done_pressed"]

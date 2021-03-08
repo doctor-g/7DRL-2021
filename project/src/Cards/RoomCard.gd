@@ -1,7 +1,12 @@
 extends "res://src/Card.gd"
 
+var _rooms = {
+	1: load("res://src/Rooms/SmallChamber.gd"),
+	2: load("res://src/Rooms/MediumChamber.gd")
+}
+
 func _init():
-	title = "Small Chamber"
+	title = "Room"
 
 
 func can_play(game:Game) -> bool:
@@ -11,4 +16,4 @@ func can_play(game:Game) -> bool:
 
 
 func play(game:Game) -> void:
-	game.room = load("res://src/Rooms/SmallChamber.gd").new()
+	game.room = _rooms[level].new()

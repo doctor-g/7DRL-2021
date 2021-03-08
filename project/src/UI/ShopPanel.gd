@@ -1,12 +1,12 @@
 extends Control
 
-const _CARDS = [ "Weapon", "Armor", "Monster", "Gold"]
+const _CARDS = [ "Weapon", "Armor", "Monster", "Gold", "Room"]
 
 var _game : Game
 
 func _ready():
 	var card_scene := preload("res://src/Card.tscn")
-	for i in range (0,4):
+	for i in range (0,_CARDS.size()):
 		var card = card_scene.instance()
 		card.set_script(load("res://src/Cards/%sCard.gd" % _CARDS[i]))
 		card.level = 2

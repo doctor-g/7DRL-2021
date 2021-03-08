@@ -40,21 +40,26 @@ __meta__ = {
 }
 
 [node name="Button1" type="Button" parent="HBox"]
-margin_left = 370.0
-margin_right = 382.0
+margin_left = 362.0
+margin_right = 374.0
 margin_bottom = 20.0
 
 [node name="Button2" type="Button" parent="HBox"]
-margin_left = 386.0
-margin_right = 398.0
+margin_left = 378.0
+margin_right = 390.0
 margin_bottom = 20.0
 
 [node name="Button3" type="Button" parent="HBox"]
-margin_left = 402.0
-margin_right = 414.0
+margin_left = 394.0
+margin_right = 406.0
 margin_bottom = 20.0
 
 [node name="Button4" type="Button" parent="HBox"]
-margin_left = 418.0
-margin_right = 430.0
+margin_left = 410.0
+margin_right = 422.0
+margin_bottom = 20.0
+
+[node name="Button5" type="Button" parent="HBox"]
+margin_left = 426.0
+margin_right = 438.0
 margin_bottom = 20.0
