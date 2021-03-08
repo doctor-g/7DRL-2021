@@ -39,6 +39,7 @@ func _on_Player_attribute_changed(player):
 	$VBoxContainer/HBoxContainer/StrengthLabel.text = "Str:%s" % _format(player.strength)
 	$VBoxContainer/HBoxContainer/DexterityLabel.text = "Dex:%s" % _format(player.dexterity)
 	$VBoxContainer/HBoxContainer/ConstitutionLabel.text = "Con:%s" % _format(player.constitution)
+	$VBoxContainer/HBoxContainer/IntelligenceLabel.text = "Int:%s" % _format(player.intelligence)
 
 
 func _format(value:int)->String:

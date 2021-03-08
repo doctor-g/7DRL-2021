@@ -12,6 +12,7 @@ signal attribute_changed
 var strength := 0 setget _set_strength
 var dexterity := 0 setget _set_dexterity
 var constitution := 0 setget _set_constitution
+var intelligence := 0 setget _set_intelligence
 
 var max_hp := 10 + constitution
 var hp := max_hp setget _set_hp
@@ -22,7 +23,7 @@ var ac := 10 + dexterity setget _set_ac
 
 # Randomly assign the given points to the attributes
 func randomize_attributes(points:int)->void:
-	var attributes = ["strength", "dexterity", "constitution"]
+	var attributes = ["strength", "dexterity", "constitution", "intelligence"]
 	while points > 0:
 		var attribute : String = attributes[randi() % attributes.size()]
 		set(attribute, get(attribute)+1)
@@ -85,4 +86,9 @@ func _set_dexterity(value):
 
 func _set_constitution(value):
 	constitution = value
+	emit_signal("attribute_changed")
+
+
+func _set_intelligence(value):
+	intelligence= value
 	emit_signal("attribute_changed")

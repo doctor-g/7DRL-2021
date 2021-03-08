@@ -166,6 +166,10 @@ func _on_CardsDoneButton_pressed():
 		_discard.append(child)
 	$CardsDoneButton.disabled = true
 	
+	# Add intelligence modifier
+	if player.intelligence != 0:
+		_set_ap(ap + player.intelligence)
+	
 	# Listen for interactions
 	for monster in get_monsters():
 		monster.connect("pressed", self, "_on_Monster_attacked", [monster])

@@ -16,59 +16,63 @@ margin_top = 7.0
 margin_right = 793.0
 margin_bottom = 593.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="GridContainer" parent="VBoxContainer"]
 margin_right = 786.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-alignment = 1
+margin_bottom = 32.0
+columns = 2
 
 [node name="StrengthLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_left = 350.0
-margin_right = 367.0
+margin_right = 24.0
 margin_bottom = 14.0
 text = "Str"
 
 [node name="DexterityLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_left = 377.0
-margin_right = 402.0
+margin_left = 28.0
+margin_right = 53.0
 margin_bottom = 14.0
 text = "Dex"
 
 [node name="ConstitutionLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_left = 412.0
-margin_right = 436.0
-margin_bottom = 14.0
+margin_top = 18.0
+margin_right = 24.0
+margin_bottom = 32.0
 text = "Con"
 
-[node name="HPLabel" type="Label" parent="VBoxContainer"]
+[node name="IntelligenceLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 28.0
 margin_top = 18.0
-margin_right = 786.0
+margin_right = 53.0
 margin_bottom = 32.0
-text = "HP: X/Y"
 
-[node name="ACLabel" type="Label" parent="VBoxContainer"]
+[node name="HPLabel" type="Label" parent="VBoxContainer"]
 margin_top = 36.0
 margin_right = 786.0
 margin_bottom = 50.0
+text = "HP: X/Y"
+
+[node name="ACLabel" type="Label" parent="VBoxContainer"]
+margin_top = 54.0
+margin_right = 786.0
+margin_bottom = 68.0
 text = "AC: ZZ"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GoldLabel" type="Label" parent="VBoxContainer"]
-margin_top = 54.0
-margin_right = 786.0
-margin_bottom = 68.0
-text = "Gold: X"
-
-[node name="WeaponLabel" type="Label" parent="VBoxContainer"]
 margin_top = 72.0
 margin_right = 786.0
 margin_bottom = 86.0
-text = "Weapon: XYZ"
+text = "Gold: X"
 
-[node name="ArmorLabel" type="Label" parent="VBoxContainer"]
+[node name="WeaponLabel" type="Label" parent="VBoxContainer"]
 margin_top = 90.0
 margin_right = 786.0
 margin_bottom = 104.0
+text = "Weapon: XYZ"
+
+[node name="ArmorLabel" type="Label" parent="VBoxContainer"]
+margin_top = 108.0
+margin_right = 786.0
+margin_bottom = 122.0
 text = "Armor: XYZ"
