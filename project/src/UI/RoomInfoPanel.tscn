@@ -22,29 +22,22 @@ __meta__ = {
 }
 
 [node name="NameLabel" type="Label" parent="HBoxContainer"]
-margin_left = 164.0
+margin_left = 218.0
 margin_top = 286.0
-margin_right = 243.0
+margin_right = 297.0
 margin_bottom = 300.0
 text = "Room Name"
 
 [node name="MonstersLabel" type="Label" parent="HBoxContainer"]
-margin_left = 255.0
+margin_left = 309.0
 margin_top = 286.0
-margin_right = 389.0
+margin_right = 443.0
 margin_bottom = 300.0
 text = "Monsters Played: X/Y"
 
 [node name="ItemsLabel" type="Label" parent="HBoxContainer"]
-margin_left = 401.0
+margin_left = 455.0
 margin_top = 286.0
-margin_right = 513.0
+margin_right = 567.0
 margin_bottom = 300.0
 text = "Items Played: X/Y"
-
-[node name="StableTurnsLabel" type="Label" parent="HBoxContainer"]
-margin_left = 525.0
-margin_top = 286.0
-margin_right = 621.0
-margin_bottom = 300.0
-text = "Stable Turns: N"

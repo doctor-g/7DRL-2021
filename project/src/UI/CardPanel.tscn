@@ -11,17 +11,3 @@ __meta__ = {
 }
 
 [node name="Cards" type="Node2D" parent="."]
-
-[node name="FreeMonsterButton" type="Button" parent="."]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -63.0
-margin_top = -20.0
-margin_right = 63.0
-text = "Add Free Monster"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="FreeMonsterButton" to="." method="_on_FreeMonsterButton_pressed"]

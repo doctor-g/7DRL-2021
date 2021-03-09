@@ -3,49 +3,36 @@ extends Control
 onready var _hp_label := $VBoxContainer/HPLabel
 onready var _weapon_label := $VBoxContainer/WeaponLabel
 onready var _armor_label := $VBoxContainer/ArmorLabel
-onready var _gold_label := $VBoxContainer/GoldLabel
 onready var _ac_label := $VBoxContainer/ACLabel
 onready var _xp_label := $VBoxContainer/XPLabel
-
-func init(player):
-	# Set up connections
-	for property in ["hp","weapon","armor","gold","ac","attribute", "xp"]:
-		var signal_name = property + "_changed"
-		var handler = "_on_Player_" + signal_name
-		player.connect(signal_name, self, handler, [player])
-		call(handler, player)
+onready var _gold_label := $VBoxContainer/GoldLabel
 
 
-func _on_Player_hp_changed(player):
-	_hp_label.text = "HP: %d/%d" % [player.hp, player.max_hp]
+func init(hero:HeroPawn)->void:
+	for attribute in ["equipment", "hp", "gold", "xp"]:
+		var signal_name = "%s_changed" % attribute
+		var method_name = "_on_%s" % signal_name
+		hero.connect(signal_name, self, method_name, [hero])
+		call(method_name, hero)
+	
+
+func _on_equipment_changed(hero:HeroPawn)->void:
+	_weapon_label.text = "Weapon: %s (%s)" % [ hero.equipped_weapon.name, hero.equipped_weapon.damage]
+	_armor_label.text = "Armor: %s (+%s)" % [ hero.equipped_armor.name, hero.equipped_armor.ac_bonus]
+	_ac_label.text = "AC: %d" % hero.ac
 
 
-func _on_Player_weapon_changed(player):
-	_weapon_label.text = "Weapon: %s" % player.weapon.get_name()
+func _on_hp_changed(hero:HeroPawn):
+	_hp_label.text = "HP: %d/%d" % [hero.hp, hero.max_hp]
 
 
-func _on_Player_gold_changed(player):
-	_gold_label.text = "Gold: %d" % player.gold
-
-
-func _on_Player_ac_changed(player):
-	_ac_label.text = "AC: %d" % player.ac
-
-
-func _on_Player_armor_changed(player):
-	_armor_label.text = "Armor: %s" % player.armor.get_name()
-
-
-func _on_Player_attribute_changed(player):
-	$VBoxContainer/HBoxContainer/StrengthLabel.text = "Str:%s" % _format(player.strength)
-	$VBoxContainer/HBoxContainer/DexterityLabel.text = "Dex:%s" % _format(player.dexterity)
-	$VBoxContainer/HBoxContainer/ConstitutionLabel.text = "Con:%s" % _format(player.constitution)
-	$VBoxContainer/HBoxContainer/IntelligenceLabel.text = "Int:%s" % _format(player.intelligence)
+func _on_gold_changed(hero:HeroPawn)->void:
+	_gold_label.text = "Gold: %d" % hero.gold
 
 
 func _format(value:int)->String:
 	return ("+%d" % value ) if value > 0 else str(value)
 
 
-func _on_Player_xp_changed(player):
+func _on_xp_changed(player):
 	_xp_label.text = "XP: %d" % player.xp

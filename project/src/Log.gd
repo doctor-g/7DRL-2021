@@ -2,8 +2,26 @@ extends Node
 
 signal log_changed(message)
 
-# Queue of messages (most recent at end)
+# History of messages (most recent at end)
 var messages = []
+
+var _queue = []
+
+# Queue a message for logging
+func queue(message:String):
+	_queue.append(message)
+	
+	
+# Flush the queue to the log
+func flush():
+	if not _queue.empty():
+		var message := ""
+		for partial in _queue:
+			message += partial + " "
+		call("log", message)
+		_queue.clear()
+		
+	
 
 func log(message:String):
 	assert(message != null)

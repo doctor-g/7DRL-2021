@@ -1,7 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Game.gd" type="Script" id=1]
-[ext_resource path="res://src/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/PlayerInfoPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/UI/RoomInfoPanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/PhasePanel.tscn" type="PackedScene" id=5]
@@ -9,6 +8,7 @@
 [ext_resource path="res://src/UI/ShopPanel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/GameOverPopup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/LogView.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Dungeon/Dungeon.tscn" type="PackedScene" id=10]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -18,11 +18,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="DoorSlot" type="Node2D" parent="."]
-position = Vector2( 470.174, 83.8088 )
-
-[node name="Door" parent="DoorSlot" instance=ExtResource( 2 )]
 
 [node name="CardsDoneButton" type="Button" parent="."]
 margin_left = 356.006
@@ -61,34 +56,6 @@ margin_bottom = -50.0
 [node name="LogView" parent="." instance=ExtResource( 9 )]
 mouse_filter = 2
 
-[node name="Monsters" type="Node2D" parent="."]
-
-[node name="Slot1" type="Node2D" parent="Monsters"]
-position = Vector2( 58.2705, 64.6272 )
-
-[node name="Slot2" type="Node2D" parent="Monsters"]
-position = Vector2( 140.909, 65.6867 )
-
-[node name="Slot3" type="Node2D" parent="Monsters"]
-position = Vector2( 57.211, 113.363 )
-
-[node name="Slot4" type="Node2D" parent="Monsters"]
-position = Vector2( 141.968, 113.363 )
-
-[node name="Items" type="Node2D" parent="."]
-
-[node name="Slot1" type="Node2D" parent="Items"]
-position = Vector2( 248.974, 62.5083 )
-
-[node name="Slot2" type="Node2D" parent="Items"]
-position = Vector2( 324.196, 62.5083 )
-
-[node name="Slot3" type="Node2D" parent="Items"]
-position = Vector2( 250.033, 118.66 )
-
-[node name="Slot4" type="Node2D" parent="Items"]
-position = Vector2( 318.898, 118.66 )
-
 [node name="GameOverPopup" parent="." instance=ExtResource( 8 )]
 visible = false
 anchor_left = 0.5
@@ -99,6 +66,10 @@ margin_left = -150.0
 margin_top = -150.0
 margin_right = 150.0
 margin_bottom = 150.0
+
+[node name="Dungeon" parent="." instance=ExtResource( 10 )]
+position = Vector2( 36.0407, 46.7194 )
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
 [connection signal="done_pressed" from="PhasePanel" to="." method="_on_PhasePanel_done_pressed"]
-[connection signal="free_monster_added" from="CardPanel" to="." method="_on_CardPanel_free_monster_added"]
+[connection signal="exited" from="Dungeon" to="." method="_on_Dungeon_exited"]
+[connection signal="replaced" from="Dungeon" to="." method="_on_Dungeon_replaced"]

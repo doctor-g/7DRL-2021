@@ -19,13 +19,12 @@ func _init():
 
 
 func can_play(game:Game) -> bool:
-	return game.count_monsters() < game.room.max_monsters \
-		and game.room.monsters_played < game.room.max_monsters
+	return game.can_add_monster()
 	
 
 func play(game:Game) -> void:
 	var monster_data = _get_random(_monsters)
-	var monster = preload("res://src/Monsters/Monster.tscn").instance()
+	var monster = load("res://src/Dungeon/MonsterPawn.tscn").instance()
 	monster.name = monster_data[0]
 	monster.level = 1
 	monster.max_hp = monster_data[1]

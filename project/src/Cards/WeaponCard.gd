@@ -1,4 +1,4 @@
-extends "res://src/Card.gd"
+extends "res://src/Cards/ItemCard.gd"
 
 var _weapons = {
 	1: [
@@ -18,18 +18,12 @@ func _init():
 	title = "Weapon"
 
 
-func can_play(game:Game) -> bool:
-	return game.get_total_monster_levels() >= 1 \
-		and game.room.items_played < game.room.max_items
-
-
 func play(game:Game) -> void:
 	var weapon_data = _get_random(_weapons)
-	var weapon = preload("res://src/Items/Item.tscn").instance()
-	weapon.set_script(load("res://src/Items/Weapon.gd"))
-	weapon.name = weapon_data[0]	
+	var weapon : Actor = load("res://src/Dungeon/ItemActor.tscn").instance()
+	weapon.set_script(load("res://src/Dungeon/WeaponActor.gd"))
+	weapon.name = weapon_data[0]
 	weapon.damage = weapon_data[1]
-	weapon.frame = weapon_data[2]	
+	weapon.frame = weapon_data[2]
 	game.add_item(weapon)
-	Log.log("You summon a %s." % weapon.name)
 

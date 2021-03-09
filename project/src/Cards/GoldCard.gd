@@ -1,4 +1,4 @@
-extends "res://src/Card.gd"
+extends "res://src/Cards/ItemCard.gd"
 
 var _range = {
 	1: "2d10",
@@ -9,15 +9,11 @@ func _init():
 	title = "Gold"
 
 
-func can_play(game:Game) -> bool:
-	return game.get_total_monster_levels() >= 1 \
-		and game.room.items_played < game.room.max_items
-
-
 func play(game:Game) -> void:
-	var item = preload("res://src/Items/Item.tscn").instance()
-	item.set_script(load("res://src/Items/Gold.gd"))
+	var item = load("res://src/Dungeon/ItemActor.tscn").instance()
+	item.set_script(load("res://src/Dungeon/GoldActor.gd"))
 	item.amount = Dice.roll(_range[level])
+	item.name = "%d pieces of gold" % item.amount	
 	item.frame = 803
 	game.add_item(item)
 	Log.log("You summon a pile of gold.")
