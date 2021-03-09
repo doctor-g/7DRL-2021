@@ -8,7 +8,6 @@ onready var _stable_turns_label := $HBoxContainer/StableTurnsLabel
 
 
 func bind_to(room):
-	print("Binding to room")
 	$HBoxContainer/NameLabel.text = room.name
 	for signal_name in _SIGNALS:
 		var method = _construct_method_name(signal_name)
