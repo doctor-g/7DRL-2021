@@ -30,7 +30,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBox" type="HBoxContainer" parent="."]
+[node name="ButtonBox" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 margin_top = 28.0316
 margin_bottom = 28.0316
@@ -39,27 +39,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button1" type="Button" parent="HBox"]
-margin_left = 362.0
-margin_right = 374.0
+[node name="Button1" type="Button" parent="ButtonBox"]
+margin_right = 800.0
 margin_bottom = 20.0
 
-[node name="Button2" type="Button" parent="HBox"]
-margin_left = 378.0
-margin_right = 390.0
-margin_bottom = 20.0
-
-[node name="Button3" type="Button" parent="HBox"]
-margin_left = 394.0
-margin_right = 406.0
-margin_bottom = 20.0
-
-[node name="Button4" type="Button" parent="HBox"]
-margin_left = 410.0
-margin_right = 422.0
-margin_bottom = 20.0
-
-[node name="Button5" type="Button" parent="HBox"]
-margin_left = 426.0
-margin_right = 438.0
-margin_bottom = 20.0
+[node name="Button2" type="Button" parent="ButtonBox"]
+margin_top = 24.0
+margin_right = 800.0
+margin_bottom = 44.0

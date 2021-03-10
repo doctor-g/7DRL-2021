@@ -26,18 +26,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ApLabel" type="Label" parent="AdventureBox"]
-margin_top = 13.0
-margin_right = 33.0
-margin_bottom = 27.0
-text = "AP: 0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="DoneButton" type="Button" parent="AdventureBox"]
-margin_left = 37.0
-margin_right = 83.0
+margin_right = 46.0
 margin_bottom = 40.0
 text = "Done"
 __meta__ = {

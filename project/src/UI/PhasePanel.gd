@@ -2,17 +2,10 @@ extends Control
 
 signal done_pressed
 
-onready var _ap_label := $AdventureBox/ApLabel
-
 
 func bind_to(game):
-	game.connect("ap_changed", self, "_on_ap_changed")
 	game.connect("phase_changed", self, "_on_phase_changed")
 	_on_phase_changed(game._phase)
-
-
-func _on_ap_changed(ap : int) -> void:
-	_ap_label.text = "AP: %d" % ap
 
 
 func _on_phase_changed(phase) -> void:

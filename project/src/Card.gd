@@ -5,25 +5,26 @@ signal played
 export var enabled_bg_color := Color.white
 export var disabled_bg_color := Color.darkgray
 
-export var enabled_text_color := Color.darkgray
-export var disabled_text_color := Color.lightgray
-
 var title : String
 var level := 1
+var skill := level
 
 var _playable := false
 
+onready var _title_label := $Control/VBoxContainer/TitleLabel
+onready var _level_label := $Control/VBoxContainer/LevelLabel
+onready var _skill_label := $Control/VBoxContainer/SkilLabel
 onready var _background = $Control/Background
 
 func _ready():
-	$Control/Title.text = title
-	$Control/LevelLabel.text = str(level)
+	_title_label.text = title
+	_level_label.text = "Level: %d" % level
+	_skill_label.text = "Skill: %d" % skill
 
 
 func update_playability(game:Game) -> void:
 	_playable = can_play(game)
 	_background.color = enabled_bg_color if _playable else disabled_bg_color
-	$Control/Title.add_color_override("font_color", enabled_text_color if _playable else disabled_text_color)
 
 
 func can_play(_game:Game)->bool:

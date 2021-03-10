@@ -1,14 +1,14 @@
 class_name Game
 extends Control
 
-signal ap_changed
+signal focus_changed(focus)
 signal phase_changed
 
 const PHASES = [ "Build", "Adventure" ]
 const BUILD_PHASE = PHASES[0]
 const ADVENTURE_PHASE = PHASES[1]
 
-var ap := 0 setget _set_ap
+var focus := 0 setget _set_focus
 
 var _phase : String = PHASES[0] setget _set_phase
 var _deck = []
@@ -18,13 +18,12 @@ var _hero : HeroPawn
 onready var _Card := load("res://src/Card.tscn")
 
 func _ready():
-	randomize()
-	
 	# Initialize UI
 	$PlayerInfoPanel.init($Dungeon.hero)
 	$PhasePanel.bind_to(self)
-	$ShopPanel.bind_to(self)
 	$RoomInfoPanel.bind_to($Dungeon)
+	$ShopPanel.bind_to(self)
+	$AdventurePanel.bind_to(self)
 	
 	_hero = $Dungeon.hero
 	_hero.connect("hp_changed", self, "_on_Hero_hp_changed")
@@ -113,15 +112,16 @@ func _on_CardsDoneButton_pressed():
 	# Remove cards from the card panel
 	while $CardPanel.count_cards() > 0:
 		var child = $CardPanel.get_card(0)
-		_set_ap(ap + 1)
+		_set_focus(focus + 1)
 		child.disconnect("played", self, "_on_Card_played")
 		$CardPanel.remove(child)
 		_discard.append(child)
 	$CardsDoneButton.disabled = true
 	
 	$Dungeon.start_adventure_phase()
-	
-	$ShopPanel.visible = true
+	$CardPanel.visible = false
+	$AdventurePanel.visible = true
+	$ShopPanel.disabled = false
 	_set_phase(ADVENTURE_PHASE)
 	
 	
@@ -134,17 +134,20 @@ func _on_PhasePanel_done_pressed():
 
 
 func _finish_action_phase()->void:
-	_set_ap(0)
+	_set_focus(0)
+	_hero.reset_attribute_modifiers()
 	$Dungeon.end_adventure_phase()
 	$CardsDoneButton.disabled = false
-	$ShopPanel.visible = false
+	$ShopPanel.disabled = true
+	$CardPanel.visible = true
+	$AdventurePanel.visible = false
 	_draw_hand()
 	_set_phase(BUILD_PHASE)
 
 
-func _set_ap(value):
-	ap = value
-	emit_signal("ap_changed", ap)
+func _set_focus(value):
+	focus = value
+	emit_signal("focus_changed", focus)
 
 
 func _set_phase(value):
@@ -164,3 +167,9 @@ func get_dungeon_level()->int:
 func _on_Dungeon_exited():
 	$Dungeon.reset()
 	_finish_action_phase()
+
+
+# When spending focus in the adventure panel, it counts as a turn,
+# so activate all the critters.
+func _on_AdventurePanel_focus_spent():
+	$Dungeon.run_monster_turn()

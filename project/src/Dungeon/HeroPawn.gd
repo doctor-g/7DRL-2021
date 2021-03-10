@@ -5,6 +5,9 @@ signal equipment_changed
 signal took_turn
 signal gold_changed
 signal xp_changed
+signal ac_changed
+
+const _ATTRIBUTES = ["strength", "dexterity", "constitution"]
 
 var active := false
 
@@ -14,14 +17,30 @@ var equipped_weapon : WeaponActor = _make_starting_weapon() setget _equip_weapon
 var armor : Array = []
 var equipped_armor : ArmorActor = _make_starting_armor() setget _equip_armor
 
-var ac : int = 10
+var ac : int = 10 setget _set_ac
 
 var gold : int = 0 setget _set_gold
 var xp := 0 setget _set_xp
 
+var strength : Attribute = Attribute.new()
+var dexterity : Attribute = Attribute.new()
+var constitution : Attribute = Attribute.new()
+
 func _init():
 	max_hp = 10
 	hp = 10
+	
+	var attributes : Array = ["strength", "dexterity", "constitution"]
+	
+	# Watch attributes for changes
+	for attribute in attributes:
+		get(attribute).connect("changed", self, "_on_%s_changed" % attribute)
+	
+	# Randomize starting stats
+	for _i in range(0,4):
+		var index = randi() % attributes.size()
+		var attribute = attributes[index]
+		get(attribute).base_value += 1
 
 
 func _make_starting_armor():
@@ -40,6 +59,12 @@ func _make_starting_weapon():
 	fists.damage = "1d2"
 	fists.frame = 89
 	return fists
+
+
+func reset_attribute_modifiers():
+	for attribute in _ATTRIBUTES:
+		get(attribute).modifier = 0
+
 
 func _process(_delta):
 	if not active:
@@ -94,8 +119,8 @@ func _process(_delta):
 
 func _attack(pawn:Pawn):
 	Log.queue("You attack the %s." % pawn.name)
-	if Dice.roll("d20") >= pawn.ac:
-		var damage = Dice.roll(equipped_weapon.damage)
+	if Dice.roll("d20") + strength.value() >= pawn.ac:
+		var damage = Dice.roll(equipped_weapon.damage) + strength.value()
 		Log.queue("You hit for %d damage!" % damage)
 		pawn.hp -= damage
 	else:
@@ -121,10 +146,8 @@ func _equip_weapon(weapon:WeaponActor) -> void:
 
 
 func _equip_armor(new_armor:ArmorActor) -> void:
-	if equipped_armor != null:
-		ac -= equipped_armor.ac_bonus
 	equipped_armor = new_armor
-	ac += equipped_armor.ac_bonus
+	_update_ac()
 	emit_signal("equipment_changed")
 
 
@@ -133,6 +156,27 @@ func _set_gold(value:int) -> void:
 	emit_signal("gold_changed")
 
 
+func _set_ac(value:int) -> void:
+	ac = value
+	emit_signal("ac_changed")
+
+
 func _set_xp(value:int) -> void:
 	xp = value
 	emit_signal("xp_changed")
+
+
+func _on_strength_changed() -> void:
+	pass # Nothing special to do.
+
+
+func _on_dexterity_changed() -> void:
+	_update_ac()
+	
+
+func _on_constitution_changed() -> void:
+	_set_max_hp(10+constitution.value())
+	
+
+func _update_ac()->void:
+	_set_ac(10 + equipped_armor.ac_bonus + dexterity.value())

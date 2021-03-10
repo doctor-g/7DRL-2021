@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Game.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/AdventurePanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/PlayerInfoPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/UI/RoomInfoPanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/PhasePanel.tscn" type="PackedScene" id=5]
@@ -45,12 +46,13 @@ margin_top = 284.615
 margin_bottom = 324.615
 
 [node name="CardPanel" parent="." instance=ExtResource( 6 )]
-anchor_top = 0.6
-margin_bottom = -70.0
+anchor_top = 0.541667
+anchor_right = 0.7525
+anchor_bottom = 0.881667
 
 [node name="ShopPanel" parent="." instance=ExtResource( 7 )]
-visible = false
 anchor_top = 0.6
+margin_left = 613.0
 margin_bottom = -50.0
 
 [node name="LogView" parent="." instance=ExtResource( 9 )]
@@ -69,7 +71,13 @@ margin_bottom = 150.0
 
 [node name="Dungeon" parent="." instance=ExtResource( 10 )]
 position = Vector2( 36.0407, 46.7194 )
+
+[node name="AdventurePanel" parent="." instance=ExtResource( 2 )]
+visible = false
+anchor_top = 0.565
+anchor_right = 0.75625
+anchor_bottom = 0.9
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
-[connection signal="done_pressed" from="PhasePanel" to="." method="_on_PhasePanel_done_pressed"]
 [connection signal="exited" from="Dungeon" to="." method="_on_Dungeon_exited"]
 [connection signal="replaced" from="Dungeon" to="." method="_on_Dungeon_replaced"]
+[connection signal="focus_spent" from="AdventurePanel" to="." method="_on_AdventurePanel_focus_spent"]

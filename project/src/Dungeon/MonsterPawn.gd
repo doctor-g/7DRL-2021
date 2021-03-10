@@ -33,7 +33,7 @@ func take_turn():
 func _attack(hero):
 	if Dice.roll("d20") >= hero.ac:
 		var amount = Dice.roll(damage)
-		hero.hp -= amount
+		hero.damage(amount)
 		Log.queue("The %s hits you for %d." % [name, amount])
 	else:
 		Log.queue("The %s misses." % name)

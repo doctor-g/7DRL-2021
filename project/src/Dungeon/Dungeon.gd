@@ -103,8 +103,11 @@ func _load(conf):
 					_item_spawn_points.append([i,j])
 
 
-
 func _on_Hero_took_turn():
+	run_monster_turn()
+	
+
+func run_monster_turn():
 	for actor in _actors:
 		if actor.has_method("take_turn"):
 			actor.take_turn()

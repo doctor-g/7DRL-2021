@@ -4,6 +4,7 @@ var _regex := RegEx.new()
 
 
 func _init():
+	randomize()
 	_regex.compile("(\\d+)?d(\\d+)([\\+\\-]\\d+)?")
 
 
