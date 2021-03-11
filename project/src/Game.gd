@@ -62,8 +62,8 @@ func _draw_hand():
 			_deck.shuffle()
 			_discard = []
 		var card = _deck.pop_front()
-		card.connect("played", self, "_on_Card_played", [card], CONNECT_ONESHOT)
-		card.connect("monsterized", self, "_on_Card_monsterized", [card], CONNECT_ONESHOT)
+		card.connect("played", self, "_on_Card_played", [card])
+		card.connect("monsterized", self, "_on_Card_monsterized", [card])
 		$CardPanel.add(card)
 	_update_cards()
 
