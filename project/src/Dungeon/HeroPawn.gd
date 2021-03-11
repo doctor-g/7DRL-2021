@@ -144,9 +144,6 @@ func _pickup(actor:Actor):
 
 
 func equip_weapon(weapon:WeaponActor) -> void:
-	print("I have %d weapons" % weapons.size())
-	for x in weapons:
-		print(x.name)
 	assert(weapons.has(weapon), "%s is not in my inventory" % weapon.name)
 	equipped_weapon = weapon
 	emit_signal("equipment_changed")
