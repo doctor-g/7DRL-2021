@@ -12,10 +12,10 @@ const _ATTRIBUTES = ["strength", "dexterity", "constitution"]
 var active := false
 
 var weapons : Array = []
-var equipped_weapon : WeaponActor = _make_starting_weapon() setget _equip_weapon
+var equipped_weapon : WeaponActor setget equip_weapon
 
 var armor : Array = []
-var equipped_armor : ArmorActor = _make_starting_armor() setget _equip_armor
+var equipped_armor : ArmorActor setget equip_armor
 
 var ac : int = 10 setget _set_ac
 
@@ -29,6 +29,9 @@ var constitution : Attribute = Attribute.new()
 func _init():
 	max_hp = 10
 	hp = 10
+	
+	_pickup(_make_starting_armor())
+	_pickup(_make_starting_weapon())
 	
 	var attributes : Array = ["strength", "dexterity", "constitution"]
 	
@@ -112,6 +115,7 @@ func _process(_delta):
 			move_to(desired_x, desired_y)# Pick up anything that was there
 			for actor in actors_there:
 				if actor.pickupable:
+					dungeon.remove(actor)
 					_pickup(actor)
 
 		emit_signal("took_turn")
@@ -128,24 +132,28 @@ func _attack(pawn:Pawn):
 
 
 func _pickup(actor:Actor):
-	dungeon.remove(actor)
 	if actor is WeaponActor:
 		weapons.append(actor)
-		_equip_weapon(actor)
+		equip_weapon(actor)
 	if actor is ArmorActor:
 		armor.append(actor)
-		_equip_armor(actor)
+		equip_armor(actor)
 	if actor is GoldActor:
 		_set_gold(gold + actor.amount)
-	Log.queue("You pick up a %s." % actor.name) 
+	Log.queue("You pick up a %s." % actor.name)
 
 
-func _equip_weapon(weapon:WeaponActor) -> void:
+func equip_weapon(weapon:WeaponActor) -> void:
+	print("I have %d weapons" % weapons.size())
+	for x in weapons:
+		print(x.name)
+	assert(weapons.has(weapon), "%s is not in my inventory" % weapon.name)
 	equipped_weapon = weapon
 	emit_signal("equipment_changed")
 
 
-func _equip_armor(new_armor:ArmorActor) -> void:
+func equip_armor(new_armor:ArmorActor) -> void:
+	assert(armor.has(new_armor), "That is not in my inventory")
 	equipped_armor = new_armor
 	_update_ac()
 	emit_signal("equipment_changed")

@@ -48,26 +48,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WeaponLabel" type="Label" parent="VBoxContainer"]
+[node name="GoldLabel" type="Label" parent="VBoxContainer"]
 margin_top = 90.0
 margin_right = 786.0
 margin_bottom = 104.0
-text = "Weapon: XYZ"
-
-[node name="ArmorLabel" type="Label" parent="VBoxContainer"]
-margin_top = 108.0
-margin_right = 786.0
-margin_bottom = 122.0
-text = "Armor: XYZ"
-
-[node name="GoldLabel" type="Label" parent="VBoxContainer"]
-margin_top = 126.0
-margin_right = 786.0
-margin_bottom = 140.0
 text = "Gold: 111"
 
 [node name="XPLabel" type="Label" parent="VBoxContainer"]
-margin_top = 144.0
+margin_top = 108.0
 margin_right = 786.0
-margin_bottom = 158.0
+margin_bottom = 122.0
 text = "XP: 123"
+
+[node name="WeaponSelector" type="OptionButton" parent="VBoxContainer"]
+margin_top = 126.0
+margin_right = 786.0
+margin_bottom = 146.0
+
+[node name="ArmorSelector" type="OptionButton" parent="VBoxContainer"]
+margin_top = 150.0
+margin_right = 786.0
+margin_bottom = 170.0
+[connection signal="item_selected" from="VBoxContainer/WeaponSelector" to="." method="_on_WeaponSelector_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/ArmorSelector" to="." method="_on_ArmorSelector_item_selected"]
