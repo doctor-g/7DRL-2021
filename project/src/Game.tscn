@@ -55,9 +55,6 @@ anchor_top = 0.6
 margin_left = 613.0
 margin_bottom = -50.0
 
-[node name="LogView" parent="." instance=ExtResource( 9 )]
-mouse_filter = 2
-
 [node name="GameOverPopup" parent="." instance=ExtResource( 8 )]
 visible = false
 anchor_left = 0.5
@@ -77,6 +74,9 @@ visible = false
 anchor_top = 0.565
 anchor_right = 0.75625
 anchor_bottom = 0.9
+
+[node name="LogView" parent="." instance=ExtResource( 9 )]
+mouse_filter = 2
 [connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
 [connection signal="exited" from="Dungeon" to="." method="_on_Dungeon_exited"]
 [connection signal="replaced" from="Dungeon" to="." method="_on_Dungeon_replaced"]
