@@ -82,6 +82,7 @@ config/icon="res://icon.png"
 
 Dice="*res://src/Dice.gd"
 Log="*res://src/Log.gd"
+MonsterFactory="*res://src/MonsterFactory.gd"
 
 [debug]
 

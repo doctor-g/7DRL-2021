@@ -1,6 +1,6 @@
 extends Control
 
-const _CARDS = [ "Weapon", "Armor", "Monster", "Gold", "Room"]
+const _CARDS = [ "Weapon", "Armor", "Gold", "Room"]
 const _OFFER_SIZE := 2
 const _CARD_SCENE := preload("res://src/Card.tscn")
 

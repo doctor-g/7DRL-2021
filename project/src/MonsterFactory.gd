@@ -1,4 +1,4 @@
-extends "res://src/Card.gd"
+extends Node
 
 var _monsters = {
 	1: [
@@ -14,16 +14,8 @@ var _monsters = {
 	]
 }
 
-func _init():
-	title = "Monster"
-
-
-func can_play(game:Game) -> bool:
-	return game.can_add_monster()
-	
-
-func play(game:Game) -> void:
-	var monster_data = _get_random(_monsters)
+func create_monster(level:int)->MonsterPawn:
+	var monster_data = _get_random_monster_data(level)
 	var monster = load("res://src/Dungeon/MonsterPawn.tscn").instance()
 	monster.name = monster_data[0]
 	monster.level = 1
@@ -31,4 +23,9 @@ func play(game:Game) -> void:
 	monster.damage = monster_data[2]
 	monster.ac = monster_data[3]
 	monster.frame = monster_data[4]
-	game.add_monster(monster)
+	return monster
+
+
+func _get_random_monster_data(level):
+	var options : Array = _monsters[level]
+	return options[randi() % options.size()]

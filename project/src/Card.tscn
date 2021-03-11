@@ -28,9 +28,12 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TitleLabel" type="Label" parent="Control/VBoxContainer"]
-margin_right = 52.0
+margin_right = 55.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Title"
@@ -40,7 +43,7 @@ __meta__ = {
 
 [node name="LevelLabel" type="Label" parent="Control/VBoxContainer"]
 margin_top = 18.0
-margin_right = 52.0
+margin_right = 55.0
 margin_bottom = 32.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Level: N"
@@ -50,13 +53,33 @@ __meta__ = {
 
 [node name="SkilLabel" type="Label" parent="Control/VBoxContainer"]
 margin_top = 36.0
-margin_right = 52.0
+margin_right = 55.0
 margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Skill: N"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FocusLabel" type="Label" parent="Control/VBoxContainer"]
+margin_top = 54.0
+margin_right = 55.0
+margin_bottom = 68.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Focus: N"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonsterizeButton" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -42.0
+margin_top = -20.0
+margin_right = 42.0
+text = "Monsterize"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 50, 62 )
@@ -65,3 +88,4 @@ __meta__ = {
 "_edit_lock_": true
 }
 [connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]
+[connection signal="pressed" from="Control/MonsterizeButton" to="." method="_on_MonsterizeButton_pressed"]

@@ -1,6 +1,7 @@
 extends Area2D
 
 signal played
+signal monsterized
 
 export var enabled_bg_color := Color.white
 export var disabled_bg_color := Color.darkgray
@@ -8,23 +9,28 @@ export var disabled_bg_color := Color.darkgray
 var title : String
 var level := 1
 var skill := level
+var focus := 1
 
 var _playable := false
 
 onready var _title_label := $Control/VBoxContainer/TitleLabel
 onready var _level_label := $Control/VBoxContainer/LevelLabel
 onready var _skill_label := $Control/VBoxContainer/SkilLabel
+onready var _focus_label := $Control/VBoxContainer/FocusLabel
 onready var _background = $Control/Background
+
 
 func _ready():
 	_title_label.text = title
 	_level_label.text = "Level: %d" % level
 	_skill_label.text = "Skill: %d" % skill
+	_focus_label.text = "Focus: %d" % focus
 
 
 func update_playability(game:Game) -> void:
 	_playable = can_play(game)
 	_background.color = enabled_bg_color if _playable else disabled_bg_color
+	$Control/MonsterizeButton.disabled = not game.can_add_monster()
 
 
 func can_play(_game:Game)->bool:
@@ -46,3 +52,6 @@ func _on_Control_gui_input(event):
 func _get_random(map):
 	var options : Array = map[level]
 	return options[randi() % options.size()]
+
+func _on_MonsterizeButton_pressed():
+	emit_signal("monsterized")

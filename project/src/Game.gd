@@ -29,8 +29,8 @@ func _ready():
 	_hero.connect("hp_changed", self, "_on_Hero_hp_changed")
 	
 	# Load the cards
-	var test = [ "Armor", "Room", "Gold", "Monster", "Weapon",
-				 "Armor", "Room", "Gold", "Monster", "Weapon" ]
+	var test = [ "Armor", "Room", "Gold", "Focus", "Weapon",
+				 "Armor", "Room", "Gold", "Focus", "Weapon" ]
 	for script in test:
 		var card = _Card.instance()
 		card.set_script(load("res://src/Cards/%sCard.gd" % script))
@@ -63,6 +63,7 @@ func _draw_hand():
 			_discard = []
 		var card = _deck.pop_front()
 		card.connect("played", self, "_on_Card_played", [card], CONNECT_ONESHOT)
+		card.connect("monsterized", self, "_on_Card_monsterized", [card], CONNECT_ONESHOT)
 		$CardPanel.add(card)
 	_update_cards()
 
@@ -71,6 +72,13 @@ func _on_Card_played(card) -> void:
 	card.play(self)
 	$CardPanel.remove(card)
 	add_to_discard(card)
+	
+	
+func _on_Card_monsterized(card) -> void:
+	$CardPanel.remove(card)
+	$Dungeon.add_monster(MonsterFactory.create_monster(card.level))
+	add_to_discard(card)
+	_update_cards()
 	
 
 func add_to_discard(card):
@@ -112,7 +120,7 @@ func _on_CardsDoneButton_pressed():
 	# Remove cards from the card panel
 	while $CardPanel.count_cards() > 0:
 		var child = $CardPanel.get_card(0)
-		_set_focus(focus + 1)
+		_set_focus(focus + child.focus)
 		child.disconnect("played", self, "_on_Card_played")
 		$CardPanel.remove(child)
 		_discard.append(child)

@@ -1,6 +1,5 @@
 extends Control
 
-
 func add(card:Node2D):
 	$Cards.add_child(card)
 	var count = $Cards.get_child_count()
