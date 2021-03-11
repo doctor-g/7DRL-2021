@@ -30,8 +30,11 @@ func _init():
 	max_hp = 10
 	hp = 10
 	
-	_pickup(_make_starting_armor())
-	_pickup(_make_starting_weapon())
+	armor.append(_make_starting_armor())
+	equip_armor(armor[0])
+	
+	weapons.append(_make_starting_weapon())
+	equip_weapon(weapons[0])
 	
 	var attributes : Array = ["strength", "dexterity", "constitution"]
 	
