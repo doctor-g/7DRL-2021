@@ -7,6 +7,7 @@ var _game : Game
 onready var _strength_button := $VBox/HBox/StrengthButton
 onready var _dexterity_button :=  $VBox/HBox/DexterityButton
 onready var _constitution_button := $VBox/HBox/ConstitutionButton
+onready var _buttons = [_strength_button, _dexterity_button, _constitution_button]
 
 
 func bind_to(game:Game)->void:
@@ -16,8 +17,9 @@ func bind_to(game:Game)->void:
 
 func _on_focus_changed(focus:int):
 	$VBox/FocusLabel.text = "Focus: %d" % focus
-	_strength_button.disabled = focus < 2
-	_dexterity_button.disabled = focus < 2
+	for button in _buttons:
+		button.disabled = focus < 2
+	
 
 
 func _on_StrengthButton_pressed():
