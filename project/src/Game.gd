@@ -122,11 +122,16 @@ func _update_cards():
 
 func _on_CardsDoneButton_pressed():
 	# Remove cards from the card panel
-	while $CardPanel.count_cards() > 0:
-		var child = $CardPanel.get_card(0)
-		_set_focus(focus + child.focus)
-		$CardPanel.remove(child)
-		_discard.append(child)
+	# But first, if there are none, make sure the focus value
+	# change still triggers.
+	if $CardPanel.count_cards() == 0:
+		_set_focus(focus)
+	else:
+		while $CardPanel.count_cards() > 0:
+			var child = $CardPanel.get_card(0)
+			_set_focus(focus + child.focus)
+			$CardPanel.remove(child)
+			_discard.append(child)
 	$CardsDoneButton.disabled = true
 	
 	$Dungeon.start_adventure_phase()
