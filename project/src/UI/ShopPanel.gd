@@ -25,8 +25,16 @@ func refresh():
 	while $ButtonBox.get_child_count() > 0:
 		$ButtonBox.remove_child($ButtonBox.get_child(0))
 	
+	var chosen_this_refresh : Array = []
 	for _i in range(0, _OFFER_SIZE):
+		# Choose a card type such that we don't get the same kind twice
+		# in the same refresh
 		var type_index := randi() % _CARDS.size()
+		while chosen_this_refresh.has(type_index):
+			type_index = randi() % _CARDS.size()
+		chosen_this_refresh.append(type_index)
+		
+		# Make the card and add it
 		var type : String = _CARDS[type_index]
 		var card = _CARD_SCENE.instance()
 		card.set_script(load("res://src/Cards/%sCard.gd" % type))
