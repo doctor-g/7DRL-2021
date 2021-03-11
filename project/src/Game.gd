@@ -81,9 +81,11 @@ func _on_Card_monsterized(card) -> void:
 	_update_cards()
 	
 
-func add_to_discard(card):
-	card.disconnect("played", self, "_on_Card_played")
-	card.disconnect("monsterized", self, "_on_Card_monsterized")
+func add_to_discard(card:Node):
+	if card.is_connected("played", self, "_on_Card_played"):
+		card.disconnect("played", self, "_on_Card_played")
+	if card.is_connected("monsterized", self, "_on_Card_monsterized"):
+		card.disconnect("monsterized", self, "_on_Card_monsterized")
 	_discard.append(card)
 
 
@@ -123,7 +125,6 @@ func _on_CardsDoneButton_pressed():
 	while $CardPanel.count_cards() > 0:
 		var child = $CardPanel.get_card(0)
 		_set_focus(focus + child.focus)
-		child.disconnect("played", self, "_on_Card_played")
 		$CardPanel.remove(child)
 		_discard.append(child)
 	$CardsDoneButton.disabled = true

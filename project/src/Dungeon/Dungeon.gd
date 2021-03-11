@@ -5,6 +5,7 @@ signal replaced
 signal changed
 
 var hero : Pawn
+var room_name :String
 
 var tile_size := 32 # Default tile size scaled by 2
 
@@ -23,6 +24,7 @@ var _level := 0
 
 const _TUNNEL = {
 	"level": 0,
+	"name": "Tunnel",
 	"tiles": [
 		"########",
 		"#S  MI D",
@@ -83,6 +85,7 @@ func get_level()->int:
 
 
 func _load(conf):
+	room_name = conf["name"]
 	_level = conf["level"]
 	var height = conf["tiles"].size()
 	var width = conf["tiles"][0].length()

@@ -10,6 +10,7 @@ var title : String
 var level := 1
 var skill := level
 var focus := 1
+var cost := 4
 
 var _playable := false
 

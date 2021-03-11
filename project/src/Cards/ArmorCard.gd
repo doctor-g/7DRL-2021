@@ -10,6 +10,11 @@ var _armors = {
 		[ "Ring Mail", +4, 82 ],
 		[ "Studded Leather", +3, 80 ],
 		[ "Chain Mail", +4, 82 ]
+	],
+	3: [
+		[ "Banded Mail", +5, 84],
+		[ "Plate Mail", +6, 83],
+		[ "Full Plate Mail", +7, 83]
 	]
 }
 

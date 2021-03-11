@@ -10,6 +10,11 @@ var _weapons = {
 		[ "Longsword", "1d8", 368 ],
 		[ "Mace", "2d4", 421 ],
 		[ "Spiked Club", "1d6+1", 129 ]
+	],
+	3: [
+		[ "Magic Longsword", "1d8+2", 320],
+		[ "BattleAxe", "1d10", 375],
+		[ "Greatsword", "1d8+1", 465]
 	]
 }
 

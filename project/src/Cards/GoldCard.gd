@@ -1,8 +1,9 @@
 extends "res://src/Cards/ItemCard.gd"
 
 var _range = {
-	1: "2d10",
-	2: "5d6"
+	1: "2d6",
+	2: "4d6",
+	3: "6d6"
 }
 
 func _init():

@@ -37,11 +37,11 @@ margin_bottom = 121.0
 text = "You have perished."
 align = 1
 
-[node name="XPLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="PanelContainer/VBoxContainer"]
 margin_top = 133.0
 margin_right = 286.0
 margin_bottom = 147.0
-text = "XP: 123"
+text = "Score: "
 align = 1
 
 [node name="PlayAgainButton" type="Button" parent="PanelContainer/VBoxContainer"]
