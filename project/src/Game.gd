@@ -82,6 +82,8 @@ func _on_Card_monsterized(card) -> void:
 	
 
 func add_to_discard(card):
+	card.disconnect("played", self, "_on_Card_played")
+	card.disconnect("monsterized", self, "_on_Card_monsterized")
 	_discard.append(card)
 
 
