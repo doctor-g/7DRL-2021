@@ -157,6 +157,9 @@ func is_passable(x:int, y:int) -> bool:
 	if _tiles.has(vector):
 		return _tiles[vector].passable
 	else:
+		for actor in _actors:
+			if actor.x==x and actor.y==y and actor is MonsterPawn:
+				return false
 		return true
 
 
