@@ -146,6 +146,7 @@ func _finish_action_phase()->void:
 	$Dungeon.end_adventure_phase()
 	$CardsDoneButton.disabled = false
 	$ShopPanel.disabled = true
+	$ShopPanel.refresh()
 	$CardPanel.visible = true
 	$AdventurePanel.visible = false
 	_draw_hand()
