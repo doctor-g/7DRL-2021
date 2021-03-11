@@ -129,10 +129,6 @@ func has_monster():
 	return get_monsters().size() > 0
 
 
-func _on_PhasePanel_done_pressed():
-	_finish_action_phase()
-
-
 func _finish_action_phase()->void:
 	_set_focus(0)
 	_hero.reset_attribute_modifiers()
