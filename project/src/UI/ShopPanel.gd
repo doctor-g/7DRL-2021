@@ -44,10 +44,17 @@ func refresh():
 		
 		var button : CardButton = CardButton.new()
 		button.disabled = true
-		button.text = "%s %d - Focus Cost: %d" % [card.title, card.level, card.focus]
+		button.text = "%s %s (%d Focus)" % [card.title, _romanize(card.level), card.focus]
 		button.connect("pressed", self, "_on_Shop_button_pressed", [card])
 		button.card = card
 		$ButtonBox.add_child(button)
+
+
+func _romanize(num:int):
+	match num:
+		1: return "I"
+		2: return "II"
+		3: return "III"
 
 
 func _on_focus_changed(_focus:int):

@@ -15,3 +15,4 @@ func _on_ExpandButton_toggled(button_pressed):
 	for message in Log.messages:
 		$History.text += message + "\n"
 	$History.visible = button_pressed
+	$PanelContainer/HBoxContainer/ExpandButton.text = "↓" if button_pressed else "↑"

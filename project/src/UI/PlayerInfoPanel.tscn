@@ -60,14 +60,20 @@ margin_right = 786.0
 margin_bottom = 122.0
 text = "XP: 123"
 
-[node name="WeaponSelector" type="OptionButton" parent="VBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="VBoxContainer"]
 margin_top = 126.0
 margin_right = 786.0
-margin_bottom = 146.0
+margin_bottom = 140.0
+text = "Score: 111"
+
+[node name="WeaponSelector" type="OptionButton" parent="VBoxContainer"]
+margin_top = 144.0
+margin_right = 786.0
+margin_bottom = 164.0
 
 [node name="ArmorSelector" type="OptionButton" parent="VBoxContainer"]
-margin_top = 150.0
+margin_top = 168.0
 margin_right = 786.0
-margin_bottom = 170.0
+margin_bottom = 188.0
 [connection signal="item_selected" from="VBoxContainer/WeaponSelector" to="." method="_on_WeaponSelector_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/ArmorSelector" to="." method="_on_ArmorSelector_item_selected"]

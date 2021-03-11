@@ -21,6 +21,7 @@ var ac : int = 10 setget _set_ac
 
 var gold : int = 0 setget _set_gold
 var xp := 0 setget _set_xp
+var score :=0 setget , _get_score
 
 var strength : Attribute = Attribute.new()
 var dexterity : Attribute = Attribute.new()
@@ -189,3 +190,7 @@ func _on_constitution_changed() -> void:
 
 func _update_ac()->void:
 	_set_ac(10 + equipped_armor.ac_bonus + dexterity.value())
+
+
+func _get_score()->int:
+	return xp + gold

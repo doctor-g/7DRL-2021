@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Game.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/AdventurePanel.tscn" type="PackedScene" id=2]
@@ -10,22 +10,22 @@
 [ext_resource path="res://src/UI/GameOverPopup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/LogView.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Dungeon/Dungeon.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/game.theme" type="Theme" id=11]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme = ExtResource( 11 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CardsDoneButton" type="Button" parent="."]
-margin_left = 356.006
-margin_top = 544.412
-margin_right = 493.006
-margin_bottom = 564.412
-text = "Ready to Adventure"
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.184314, 0.176471, 0.176471, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -36,19 +36,25 @@ anchor_bottom = 0.5
 margin_top = 23.1634
 margin_bottom = 23.1634
 
-[node name="RoomInfoPanel" parent="." instance=ExtResource( 4 )]
-anchor_bottom = 0.0
-margin_bottom = 28.0
-
 [node name="PhasePanel" parent="." instance=ExtResource( 5 )]
 anchor_right = 0.7
-margin_top = 284.615
-margin_bottom = 324.615
+margin_top = 288.826
+margin_bottom = -274.174
+
+[node name="RoomInfoPanel" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.7
+anchor_bottom = 0.0
+margin_left = 11.0
+margin_top = 319.0
+margin_right = -7.0
+margin_bottom = 351.0
 
 [node name="CardPanel" parent="." instance=ExtResource( 6 )]
-anchor_top = 0.541667
+anchor_top = 0.61052
 anchor_right = 0.7525
-anchor_bottom = 0.881667
+anchor_bottom = 0.852187
+margin_top = 18.6877
+margin_bottom = 18.6877
 
 [node name="ShopPanel" parent="." instance=ExtResource( 7 )]
 anchor_top = 0.6
@@ -75,9 +81,19 @@ anchor_top = 0.565
 anchor_right = 0.75625
 anchor_bottom = 0.9
 
+[node name="CardsDoneButton" type="Button" parent="."]
+margin_left = 213.637
+margin_top = 346.536
+margin_right = 369.637
+margin_bottom = 370.536
+text = "Ready to Adventure"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LogView" parent="." instance=ExtResource( 9 )]
 mouse_filter = 2
-[connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]
 [connection signal="exited" from="Dungeon" to="." method="_on_Dungeon_exited"]
 [connection signal="replaced" from="Dungeon" to="." method="_on_Dungeon_replaced"]
 [connection signal="focus_spent" from="AdventurePanel" to="." method="_on_AdventurePanel_focus_spent"]
+[connection signal="pressed" from="CardsDoneButton" to="." method="_on_CardsDoneButton_pressed"]

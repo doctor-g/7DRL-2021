@@ -50,6 +50,10 @@ func get_monsters() -> Array:
 	return $Dungeon.get_monsters()
 
 
+func get_total_monster_levels()->int:
+	return $Dungeon.get_total_monster_levels()
+
+
 func get_items() -> Array:
 	return $Dungeon.get_monsters()
 

@@ -193,6 +193,13 @@ func get_monsters()->Array:
 	return result
 
 
+func get_total_monster_levels()->int:
+	var total_level := 0
+	for monster in get_monsters():
+		total_level += monster.level
+	return total_level
+
+
 func count_unused_item_slots()->int:
 	return _item_spawn_points.size()
 	

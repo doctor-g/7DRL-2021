@@ -1,9 +1,10 @@
 extends "res://src/Card.gd"
 
 
+func _init():
+	has_threat_requirement = true
+
+
 func can_play(game:Game) -> bool:
-	var monsters = game.get_monsters()
-	var total_level := 0
-	for monster in monsters:
-		total_level += monster.level
+	var total_level = game.get_total_monster_levels()
 	return total_level >= level and game.can_add_item()

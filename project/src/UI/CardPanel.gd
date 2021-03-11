@@ -1,10 +1,12 @@
 extends Control
 
+const CARD_WIDTH = 114
+
 func add(card:Node2D):
 	$Cards.add_child(card)
 	var count = $Cards.get_child_count()
 	for i in range(0,count):
-		var x = range_lerp(i, 0, count-1, 0, rect_size.x-150) # Minus card width, that is
+		var x = range_lerp(i, 0, count-1, 0, rect_size.x-114) # Minus card width, that is
 		var pos = Vector2(x,0)
 		$Cards.get_child(i).position = pos
 

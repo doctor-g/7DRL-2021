@@ -1,18 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/UI/PhasePanel.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/NanumGothicCoding/NanumGothicCoding-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 2 )
 
 [node name="PhasePanel" type="Control"]
 anchor_right = 1.0
-margin_right = 6.10352e-05
-margin_bottom = 40.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PhaseLabel" type="Label" parent="."]
-margin_top = 14.2544
-margin_right = 119.0
-margin_bottom = 28.2544
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -102.0
+margin_right = 102.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 1 )
 text = "Build the Dungeon"
+align = 1

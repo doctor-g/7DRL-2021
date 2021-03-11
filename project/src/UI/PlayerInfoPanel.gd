@@ -13,6 +13,7 @@ onready var _dex_label := $VBoxContainer/DexLabel
 onready var _con_label := $VBoxContainer/ConLabel
 onready var _weapon_selector := $VBoxContainer/WeaponSelector
 onready var _armor_selector := $VBoxContainer/ArmorSelector
+onready var _score_label := $VBoxContainer/ScoreLabel
 
 func init(hero:HeroPawn)->void:
 	_hero = hero
@@ -76,6 +77,7 @@ func _on_hp_changed(hero:HeroPawn):
 
 func _on_gold_changed(hero:HeroPawn)->void:
 	_gold_label.text = "Gold: %d" % hero.gold
+	_update_score_label(hero)
 
 
 func _format(value:int)->String:
@@ -84,6 +86,11 @@ func _format(value:int)->String:
 
 func _on_xp_changed(player):
 	_xp_label.text = "XP: %d" % player.xp
+	_update_score_label(player)
+
+
+func _update_score_label(hero:HeroPawn):
+	_score_label.text= "Score: %d" % hero.score
 
 
 func _on_strength_changed(hero:HeroPawn):

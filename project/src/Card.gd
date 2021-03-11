@@ -3,34 +3,41 @@ extends Area2D
 signal played
 signal monsterized
 
-export var enabled_bg_color := Color.white
-export var disabled_bg_color := Color.darkgray
-
 var title : String
 var level := 1
-var skill := level
 var focus := 1
 var cost := 4
+var has_threat_requirement := false
 
 var _playable := false
 
-onready var _title_label := $Control/VBoxContainer/TitleLabel
-onready var _level_label := $Control/VBoxContainer/LevelLabel
-onready var _skill_label := $Control/VBoxContainer/SkilLabel
-onready var _focus_label := $Control/VBoxContainer/FocusLabel
-onready var _background = $Control/Background
+onready var _title_label := $Control/TitleLabel
+onready var _focus_label := $Control/FocusLabel
+onready var _threat_label := $Control/ThreatLabel
 
 
 func _ready():
-	_title_label.text = title
-	_level_label.text = "Level: %d" % level
-	_skill_label.text = "Skill: %d" % skill
+	_title_label.text = "%s %s" % [title, _romanize_level()]
 	_focus_label.text = "Focus: %d" % focus
+	_threat_label.visible = has_threat_requirement
+	_threat_label.text = "Threat Req: %d" % level
+	# Now here's a kludge.
+	if title=="Focus":
+		_threat_label.visible = true
+		_threat_label.text = "Unplayable"
+
+
+func _romanize_level():
+	match level:
+		1: return "I"
+		2: return "II"
+		3: return "III"
 
 
 func update_playability(game:Game) -> void:
 	_playable = can_play(game)
-	_background.color = enabled_bg_color if _playable else disabled_bg_color
+	$Control/Unplayable.visible = not _playable
+	$Control/Playable.visible = _playable
 	$Control/MonsterizeButton.disabled = not game.can_add_monster()
 
 

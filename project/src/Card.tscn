@@ -1,72 +1,129 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Card.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/NanumGothicCoding/NanumGothicCoding-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/game.theme" type="Theme" id=3]
+[ext_resource path="res://assets/fonts/NanumGothicCoding/NanumGothicCoding-Regular.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 50, 62 )
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0.239216, 0.192157, 0.231373, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 14
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 57, 47 )
 
 [node name="Card" type="Area2D"]
 script = ExtResource( 1 )
 
 [node name="Control" type="Control" parent="."]
-margin_right = 100.0
-margin_bottom = 125.0
+margin_right = 114.0
+margin_bottom = 95.0
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ColorRect" parent="Control"]
+[node name="Playable" type="Control" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0.388235, 0.388235, 0.388235, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Border" type="ColorRect" parent="Control/Playable"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.329412, 0.176471, 0.164706, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleLabel" type="Label" parent="Control/VBoxContainer"]
-margin_right = 55.0
-margin_bottom = 14.0
+[node name="Background" type="ColorRect" parent="Control/Playable"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+mouse_filter = 2
+color = Color( 0.478431, 0.270588, 0.254902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unplayable" type="Control" parent="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Border" type="ColorRect" parent="Control/Unplayable"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.23, 0.17825, 0.1725, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="Control/Unplayable"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+mouse_filter = 2
+color = Color( 0.3, 0.2356, 0.231, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -45.0
+margin_top = 10.6066
+margin_right = 45.0
+margin_bottom = 27.6066
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Title"
+text = "Monster III"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelLabel" type="Label" parent="Control/VBoxContainer"]
-margin_top = 18.0
-margin_right = 55.0
-margin_bottom = 32.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Level: N"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SkilLabel" type="Label" parent="Control/VBoxContainer"]
-margin_top = 36.0
-margin_right = 55.0
-margin_bottom = 50.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Skill: N"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FocusLabel" type="Label" parent="Control/VBoxContainer"]
-margin_top = 54.0
-margin_right = 55.0
-margin_bottom = 68.0
+[node name="FocusLabel" type="Label" parent="Control"]
+margin_left = 12.4598
+margin_top = 35.9169
+margin_right = 92.4598
+margin_bottom = 50.9169
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Focus: N"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ThreatLabel" type="Label" parent="Control"]
+margin_left = 12.4598
+margin_top = 52.9814
+margin_right = 103.46
+margin_bottom = 67.9814
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Threat Req: N"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -76,16 +133,19 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -42.0
-margin_top = -20.0
-margin_right = 42.0
+margin_left = -46.0
+margin_top = 8.52692
+margin_right = 46.0
+margin_bottom = 32.5269
+theme = ExtResource( 3 )
 text = "Monsterize"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 50, 62 )
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
+visible = false
+position = Vector2( 57.7782, 47.8578 )
+shape = SubResource( 2 )
 [connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]
 [connection signal="pressed" from="Control/MonsterizeButton" to="." method="_on_MonsterizeButton_pressed"]

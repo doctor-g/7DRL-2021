@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/UI/RoomInfoPanel.gd" type="Script" id=1]
 
-[node name="RoomInfoPanel" type="PanelContainer"]
+[node name="RoomInfoPanel" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -10,34 +10,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 793.0
-margin_bottom = 593.0
-custom_constants/separation = 12
-alignment = 1
+[node name="NameLabel" type="Label" parent="."]
+margin_right = 79.0
+margin_bottom = 14.0
+text = "Room Name"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NameLabel" type="Label" parent="HBoxContainer"]
-margin_left = 218.0
-margin_top = 286.0
-margin_right = 297.0
-margin_bottom = 300.0
-text = "Room Name"
+[node name="MonstersLabel" type="Label" parent="."]
+anchor_left = 0.3
+anchor_right = 0.5
+margin_bottom = 14.0
+text = "Monsters: X/Y"
 
-[node name="MonstersLabel" type="Label" parent="HBoxContainer"]
-margin_left = 309.0
-margin_top = 286.0
-margin_right = 443.0
-margin_bottom = 300.0
-text = "Monsters Played: X/Y"
+[node name="ThreatLabel" type="Label" parent="."]
+anchor_left = 0.6
+anchor_right = 0.6
+margin_right = 139.409
+margin_bottom = 14.0
+text = "Threat: X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ItemsLabel" type="Label" parent="HBoxContainer"]
-margin_left = 455.0
-margin_top = 286.0
-margin_right = 567.0
-margin_bottom = 300.0
-text = "Items Played: X/Y"
+[node name="ItemsLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_top = -0.840897
+grow_horizontal = 0
+text = "Items: X/Y"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
