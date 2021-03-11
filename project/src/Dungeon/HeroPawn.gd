@@ -67,6 +67,7 @@ func _make_starting_weapon():
 func reset_attribute_modifiers():
 	for attribute in _ATTRIBUTES:
 		get(attribute).modifier = 0
+	_set_temp_hp(0)
 
 
 func _process(_delta):
