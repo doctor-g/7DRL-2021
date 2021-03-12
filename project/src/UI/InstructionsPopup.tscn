@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/styles/subheading_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/UI/InstructionsPopup.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/NanumGothicCoding/NanumGothicCoding-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/NanumGothicCoding/NanumGothicCoding-Bold.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="InstructionsPopup" type="Popup"]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 793.0
+margin_bottom = 593.0
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_right = 786.0
+margin_bottom = 22.0
+custom_fonts/font = ExtResource( 1 )
+text = "Instructions"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 786.0
+margin_bottom = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 786.0
+margin_bottom = 562.0
+size_flags_vertical = 3
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "Each round is divided into two phases: [b]build[/b] and [b]adventure[/b].
+
+[b]Build Phase[/b]
+In this phase, you build a dungeon room to explore. The default room is a simple tunnel that may only contain one monster and one treasure, but if you have a [b]Room[/b] card in your hand, you can expand the room. You add monsters by \"monsterizing\" your cards: discarding the card to add a monster of the same level as the card. You need monsters in the room before you can play items like armor, weapons, and gold.
+
+Each card you do not play earns you [b]Focus[/b], which is used in the next phase.
+
+[b]Adventure Phase[/b]
+During this phase, you explore the room you have created. Use the numpad or traditional Rogue/vi keys (HJKL) to move your adventurer. Moving into a monster will attack it, and moving over an item will pick it up. You can also press . or numpad 5 to pass and let the monsters act.
+
+There are two ways to spend [b]Focus[/b] that you saved from the build phase. You can activate powerful abilities that will improve your attributes, which will help you survive the dungeon room. You can also spend Focus to buy new cards that are added to your deck, which will help you gain greater rewards and earn a higher score.
+
+[b]Attributes[b]
+At the start of the game, your attributes are randomly determined.
+
+- Strength affects your ability to hit and do damage. 
+- Dexterity affects your Armor Class (AC), making you harder to hit.
+- Constitution adds to your maximum hit points (HP).
+
+[b]Score[/b]
+Your score is the total of the Gold you have collected and the XP you earn by defeating monsters."
+text = "Each round is divided into two phases: build and adventure.
+
+Build Phase
+In this phase, you build a dungeon room to explore. The default room is a simple tunnel that may only contain one monster and one treasure, but if you have a Room card in your hand, you can expand the room. You add monsters by \"monsterizing\" your cards: discarding the card to add a monster of the same level as the card. You need monsters in the room before you can play items like armor, weapons, and gold.
+
+Each card you do not play earns you Focus, which is used in the next phase.
+
+Adventure Phase
+During this phase, you explore the room you have created. Use the numpad or traditional Rogue/vi keys (HJKL) to move your adventurer. Moving into a monster will attack it, and moving over an item will pick it up. You can also press . or numpad 5 to pass and let the monsters act.
+
+There are two ways to spend Focus that you saved from the build phase. You can activate powerful abilities that will improve your attributes, which will help you survive the dungeon room. You can also spend Focus to buy new cards that are added to your deck, which will help you gain greater rewards and earn a higher score.
+
+Attributes
+At the start of the game, your attributes are randomly determined.
+
+- Strength affects your ability to hit and do damage. 
+- Dexterity affects your Armor Class (AC), making you harder to hit.
+- Constitution adds to your maximum hit points (HP).
+
+Score
+Your score is the total of the Gold you have collected and the XP you earn by defeating monsters."
+
+[node name="DismissButton" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 566.0
+margin_right = 786.0
+margin_bottom = 586.0
+size_flags_stretch_ratio = 0.0
+text = "OK"
+[connection signal="pressed" from="PanelContainer/VBoxContainer/DismissButton" to="." method="_on_DismissButton_pressed"]

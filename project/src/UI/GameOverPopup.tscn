@@ -3,7 +3,6 @@
 [ext_resource path="res://src/UI/GameOverPopup.gd" type="Script" id=1]
 
 [node name="GameOverPopup" type="Popup"]
-visible = true
 anchor_right = 0.25
 anchor_bottom = 0.167
 margin_right = 1.52588e-05

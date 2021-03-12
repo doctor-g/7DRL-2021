@@ -1,5 +1,7 @@
 extends Control
 
+signal help_button_pressed
+
 onready var _latest_message_label := $PanelContainer/HBoxContainer/LatestMessageLabel
 
 func _init():
@@ -16,3 +18,7 @@ func _on_ExpandButton_toggled(button_pressed):
 		$History.text += message + "\n"
 	$History.visible = button_pressed
 	$PanelContainer/HBoxContainer/ExpandButton.text = "↓" if button_pressed else "↑"
+
+
+func _on_HelpButton_pressed():
+	emit_signal("help_button_pressed")

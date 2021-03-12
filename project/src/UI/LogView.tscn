@@ -49,10 +49,18 @@ text = "↑"
 [node name="LatestMessageLabel" type="Label" parent="PanelContainer/HBoxContainer"]
 margin_left = 24.0
 margin_top = 5.0
-margin_right = 89.0
+margin_right = 764.0
 margin_bottom = 19.0
+size_flags_horizontal = 3
 text = "Log ready."
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HelpButton" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_left = 768.0
+margin_right = 786.0
+margin_bottom = 24.0
+text = "?"
 [connection signal="toggled" from="PanelContainer/HBoxContainer/ExpandButton" to="." method="_on_ExpandButton_toggled"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/HelpButton" to="." method="_on_HelpButton_pressed"]

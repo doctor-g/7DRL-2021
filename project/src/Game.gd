@@ -194,3 +194,17 @@ func _on_Dungeon_exited():
 # so activate all the critters.
 func _on_AdventurePanel_focus_spent():
 	$Dungeon.run_monster_turn()
+
+
+func _input(event):
+	if event is InputEventKey:
+		if _is_question_mark(event):
+			$InstructionsPopup.show_modal(true)
+
+
+func _is_question_mark(event:InputEventKey)->bool:
+	return event.shift and event.scancode==KEY_SLASH
+
+
+func _on_LogView_help_button_pressed():
+	$InstructionsPopup.show_modal(true)
