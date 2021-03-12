@@ -9,6 +9,8 @@ A Roguelike Deckbuilder made for the 2021 [7DRL Challenge](https://7drl.com/).
 
 - [Project page on Itch.io](https://doctor-g.itch.io/build-and-delve)
 
+- [Blog post](http://paulgestwicki.blogspot.com/2021/03/build-and-delve-deckbuilding-rogulike.html)
+
 
 ## Third-Party Assets
 
