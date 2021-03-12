@@ -1,7 +1,7 @@
 extends Popup
 
 func prepare(hero:HeroPawn):
-	$PanelContainer/VBoxContainer/ScoreLabel.text = "SCore: %d" % (hero.xp + hero.gold)
+	$PanelContainer/VBoxContainer/ScoreLabel.text = "Score: %d" % (hero.xp + hero.gold)
 
 
 func _on_PlayAgainButton_pressed():
