@@ -140,6 +140,8 @@ func _on_CardsDoneButton_pressed():
 	
 	$Dungeon.start_adventure_phase()
 	$CardPanel.visible = false
+	$RoomInfoPanel.visible = false
+	$CardsDoneButton.visible = false
 	$AdventurePanel.visible = true
 	$ShopPanel.disabled = false
 	_set_phase(ADVENTURE_PHASE)
@@ -158,6 +160,8 @@ func _finish_action_phase()->void:
 	$ShopPanel.refresh()
 	$CardPanel.visible = true
 	$AdventurePanel.visible = false
+	$RoomInfoPanel.visible = true
+	$CardsDoneButton.visible = true
 	_draw_hand()
 	_set_phase(BUILD_PHASE)
 
