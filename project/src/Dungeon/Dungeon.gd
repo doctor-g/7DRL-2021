@@ -22,6 +22,8 @@ var _door
 
 var _level := 0
 
+onready var _origin := position
+
 const _TUNNEL = {
 	"level": 0,
 	"name": "Tunnel",
@@ -87,8 +89,8 @@ func get_level()->int:
 func _load(conf):
 	room_name = conf["name"]
 	_level = conf["level"]
-	var height = conf["tiles"].size()
-	var width = conf["tiles"][0].length()
+	var height : int = conf["tiles"].size()
+	var width : int = conf["tiles"][0].length()
 	for i in range(0,width):
 		for j in range(0,height):
 			var symbol = conf["tiles"][j][i]
@@ -104,6 +106,10 @@ func _load(conf):
 					_monster_spawn_points.append([i,j])
 				"I":
 					_item_spawn_points.append([i,j])
+	var screen_width : float = width * tile_size
+	var screen_height : float = height * tile_size
+	position.x = _origin.x - screen_width / 2
+	position.y = _origin.y - screen_height / 2
 
 
 func _on_Hero_took_turn():

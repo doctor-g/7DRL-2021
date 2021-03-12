@@ -39,28 +39,30 @@ margin_bottom = 23.1634
 
 [node name="PhasePanel" parent="." instance=ExtResource( 5 )]
 anchor_right = 0.7
-margin_top = 288.826
-margin_bottom = -274.174
+margin_left = 26.8701
+margin_top = 319.939
+margin_right = 26.8701
+margin_bottom = -243.061
 
 [node name="RoomInfoPanel" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.7
 anchor_bottom = 0.0
-margin_left = 11.0
-margin_top = 319.0
-margin_right = -7.0
-margin_bottom = 351.0
+margin_left = 46.8701
+margin_top = 350.113
+margin_right = 6.87006
+margin_bottom = 382.113
 
 [node name="CardPanel" parent="." instance=ExtResource( 6 )]
 anchor_top = 0.61052
 anchor_right = 0.7525
 anchor_bottom = 0.852187
-margin_top = 18.6877
-margin_bottom = 18.6877
+margin_top = 46.972
+margin_bottom = 46.9719
 
 [node name="ShopPanel" parent="." instance=ExtResource( 7 )]
 anchor_top = 0.6
+anchor_bottom = 0.9
 margin_left = 613.0
-margin_bottom = -50.0
 
 [node name="GameOverPopup" parent="." instance=ExtResource( 8 )]
 anchor_left = 0.5
@@ -73,19 +75,19 @@ margin_right = 100.0
 margin_bottom = 50.0
 
 [node name="Dungeon" parent="." instance=ExtResource( 10 )]
-position = Vector2( 36.0407, 46.7194 )
+position = Vector2( 304.741, 159.856 )
 
 [node name="AdventurePanel" parent="." instance=ExtResource( 2 )]
 visible = false
-anchor_top = 0.565
+anchor_top = 0.6
 anchor_right = 0.75625
 anchor_bottom = 0.9
 
 [node name="CardsDoneButton" type="Button" parent="."]
-margin_left = 213.637
-margin_top = 346.536
-margin_right = 369.637
-margin_bottom = 370.536
+margin_left = 240.507
+margin_top = 377.649
+margin_right = 396.507
+margin_bottom = 401.649
 text = "Ready to Adventure"
 __meta__ = {
 "_edit_use_anchors_": false

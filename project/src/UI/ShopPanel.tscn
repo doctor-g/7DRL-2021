@@ -19,13 +19,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -100.0
-margin_top = 20.0
-margin_right = 100.0
-margin_bottom = 22.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.05
+anchor_right = 0.95
+anchor_bottom = 1.0
+custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 79.0
+margin_right = 720.0
+margin_bottom = 101.0
+size_flags_vertical = 6
 custom_fonts/font = ExtResource( 2 )
 text = "Card Offer"
 align = 1
@@ -33,22 +40,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonBox" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-margin_left = 8.0
-margin_top = 52.0
-margin_right = -8.0
-margin_bottom = 28.0316
+[node name="ButtonBox" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 192.0
+margin_right = 720.0
+margin_bottom = 552.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+custom_constants/separation = 12
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button1" type="Button" parent="ButtonBox"]
-margin_right = 784.0
-margin_bottom = 20.0
+[node name="Button1" type="Button" parent="VBoxContainer/ButtonBox"]
+margin_right = 720.0
+margin_bottom = 174.0
+size_flags_vertical = 3
 
-[node name="Button2" type="Button" parent="ButtonBox"]
-margin_top = 24.0
-margin_right = 784.0
-margin_bottom = 44.0
+[node name="Button2" type="Button" parent="VBoxContainer/ButtonBox"]
+margin_top = 186.0
+margin_right = 720.0
+margin_bottom = 360.0
+size_flags_vertical = 3
+
+[node name="Bottompadding" type="Label" parent="VBoxContainer"]
+margin_top = 575.0
+margin_right = 720.0
+margin_bottom = 589.0
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.2

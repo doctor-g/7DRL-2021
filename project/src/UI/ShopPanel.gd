@@ -10,6 +10,8 @@ var _game : Game
 
 var disabled := true setget _set_disabled
 
+onready var _button_box := $VBoxContainer/ButtonBox
+
 func _ready():
 	refresh()
 
@@ -22,8 +24,8 @@ func bind_to(game:Game):
 
 func refresh():
 	# Remove all old buttons
-	while $ButtonBox.get_child_count() > 0:
-		$ButtonBox.remove_child($ButtonBox.get_child(0))
+	while _button_box.get_child_count() > 0:
+		_button_box.remove_child(_button_box.get_child(0))
 	
 	var chosen_this_refresh : Array = []
 	for _i in range(0, _OFFER_SIZE):
@@ -44,10 +46,11 @@ func refresh():
 		
 		var button : CardButton = CardButton.new()
 		button.disabled = true
+		button.size_flags_vertical = SIZE_EXPAND_FILL
 		button.text = "%s %s (%d Focus)" % [card.title, _romanize(card.level), card.focus]
 		button.connect("pressed", self, "_on_Shop_button_pressed", [card])
 		button.card = card
-		$ButtonBox.add_child(button)
+		_button_box.add_child(button)
 
 
 func _romanize(num:int):
@@ -72,7 +75,7 @@ func _set_disabled(value):
 
 
 func _update_button_disabled_state():
-	for button in $ButtonBox.get_children():
+	for button in _button_box.get_children():
 		button.disabled = disabled or _game.focus < button.card.cost
 
 
