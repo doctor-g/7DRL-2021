@@ -2,9 +2,13 @@
 
 A Roguelike Deckbuilder made for the 2021 [7DRL Challenge](https://7drl.com/).
 
-&copy;2021 Paul Gestwicki
 
-This project is licensed under the GNU General Public License. 
+## Links
+
+- [Play the latest build online](https://doctor-g.github.io/7DRL-2021/)
+
+- [Project page on Itch.io](https://doctor-g.itch.io/build-and-delve)
+
 
 ## Third-Party Assets
 
@@ -13,3 +17,9 @@ This project is licensed under the GNU General Public License.
 - [Inconsolata Font](https://fonts.google.com/specimen/Inconsolata) used under [OFL](project/assets/fonts/Inconsolata/OFL.txt)
 
 - [Nanum Gothic Coding Font](https://fonts.google.com/specimen/Nanum+Gothic+Coding) used under [OFL](project/assets/NanumGothicCoding/OFL.txt)
+
+## Legal 
+
+&copy;2021 Paul Gestwicki
+
+This is free software, licensed under the GNU General Public License.
