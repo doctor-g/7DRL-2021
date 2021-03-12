@@ -42,19 +42,19 @@ align = 1
 margin_top = 276.0
 margin_right = 780.0
 margin_bottom = 296.0
-text = "Rage (+2 Str / 2 Focus)"
+text = "Enrage for +2 Str (2 Focus)"
 
 [node name="DexterityButton" type="Button" parent="VBox"]
 margin_top = 306.0
 margin_right = 780.0
 margin_bottom = 326.0
-text = "Adrenaline (+2 Dex / 2 Focus)"
+text = "Invigorate for +2 Dex (2 Focus)"
 
 [node name="ConstitutionButton" type="Button" parent="VBox"]
 margin_top = 336.0
 margin_right = 780.0
 margin_bottom = 356.0
-text = "Constitution (+2 TmpHP / 2 Focus)"
+text = "Bolster for +2 Temporary HP (2 Focus)"
 [connection signal="pressed" from="VBox/StrengthButton" to="." method="_on_StrengthButton_pressed"]
 [connection signal="pressed" from="VBox/DexterityButton" to="." method="_on_DexterityButton_pressed"]
 [connection signal="pressed" from="VBox/ConstitutionButton" to="." method="_on_ConstitutionButton_pressed"]
