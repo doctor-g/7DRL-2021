@@ -2,16 +2,19 @@ extends "res://src/Cards/ItemCard.gd"
 
 var _armors = {
 	1: [
+		[ "Heavy Cloak", +1, 86],
 		[ "Padded Armor", +2, 80 ], 
 		[ "Leather Armor", +2, 80 ], 
-		[ "Heavy Clothes", +1, 85 ]
+		[ "Heavy Clothes", +1, 85 ],
 	],
 	2: [
-		[ "Ring Mail", +4, 82 ],
+		[ "Hide Armor", +3, 85 ],
+		[ "Scale Mail", +4, 82 ],
 		[ "Studded Leather", +3, 80 ],
 		[ "Chain Mail", +4, 82 ]
 	],
 	3: [
+		[ "Ring Mail", +5, 81 ],
 		[ "Banded Mail", +5, 84],
 		[ "Plate Mail", +6, 83],
 		[ "Full Plate Mail", +7, 83]
