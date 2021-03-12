@@ -196,6 +196,7 @@ func get_dungeon_level()->int:
 func _on_Dungeon_exited():
 	$Dungeon.reset()
 	_finish_action_phase()
+	Log.log("You enter a new tunnel.")
 
 
 # When spending focus in the adventure panel, it counts as a turn,
