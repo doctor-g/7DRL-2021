@@ -73,6 +73,7 @@ func _draw_hand():
 		card.connect("monsterized", self, "_on_Card_monsterized", [card])
 		$CardPanel.add(card)
 	emit_signal("deck_changed", _deck)
+	emit_signal("discard_changed", _discard)
 	_update_cards()
 
 
