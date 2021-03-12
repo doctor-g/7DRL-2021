@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/styles/subheading_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/UI/AboutPopup.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/NanumGothicCoding/NanumGothicCoding-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/NanumGothicCoding/NanumGothicCoding-Bold.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
 
 [node name="AboutPopup" type="Popup"]
 anchor_right = 1.0
@@ -35,12 +43,29 @@ margin_top = 34.0
 margin_right = 786.0
 margin_bottom = 562.0
 size_flags_vertical = 3
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[b]Build and Delve[/b]
+©2021 Paul Gestwicki
+
+This project uses Kenney's 1-Bit Pack spritesheet, which is licensed under CC0 1.0 Universal. You can find this pack at https://www.kenney.nl/assets/bit-pack. Thanks, Kenney!
+
+This project uses Inconsolata and Nanum Gothic Coding fonts, which are licensed under the OFL. Thank you to the Inconsolata Project Authors and NHN Corporation for providing these fonts.
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>."
 text = "Build and Delve
 ©2021 Paul Gestwicki
 
 This project uses Kenney's 1-Bit Pack spritesheet, which is licensed under CC0 1.0 Universal. You can find this pack at https://www.kenney.nl/assets/bit-pack. Thanks, Kenney!
 
-This project uses Inconsolata and Nanum Gothic Coding fonts, which are licensed under the OFL. Thank you to the Inconsolata Project Authors and NHN Corporation for providing these fonts."
+This project uses Inconsolata and Nanum Gothic Coding fonts, which are licensed under the OFL. Thank you to the Inconsolata Project Authors and NHN Corporation for providing these fonts.
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>."
 
 [node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
 margin_top = 566.0
