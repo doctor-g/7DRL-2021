@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/PlayerInfoPanel.gd" type="Script" id=1]
+[ext_resource path="res://assets/monochrome_transparent_packed.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/IconLabel.tscn" type="PackedScene" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 304, 272, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 304, 256, 16, 16 )
 
 [node name="PlayerInfoPanel" type="PanelContainer"]
 anchor_right = 1.0
@@ -75,5 +85,53 @@ margin_bottom = 164.0
 margin_top = 168.0
 margin_right = 786.0
 margin_bottom = 188.0
+
+[node name="DeckBox" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 192.0
+margin_right = 786.0
+margin_bottom = 208.0
+alignment = 1
+
+[node name="DeckLabel" parent="VBoxContainer/DeckBox" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 353.0
+margin_right = 369.0
+margin_bottom = 16.0
+texture = SubResource( 1 )
+frame = 835
+
+[node name="DeckSizeLabel" type="Label" parent="VBoxContainer/DeckBox"]
+margin_left = 373.0
+margin_top = 1.0
+margin_right = 381.0
+margin_bottom = 15.0
+text = "1"
+
+[node name="BlankSpacerLabel" type="Label" parent="VBoxContainer/DeckBox"]
+margin_left = 385.0
+margin_top = 1.0
+margin_right = 401.0
+margin_bottom = 15.0
+text = "    "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DiscardLabel" parent="VBoxContainer/DeckBox" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 405.0
+margin_right = 421.0
+margin_bottom = 16.0
+texture = SubResource( 2 )
+frame = 787
+
+[node name="DiscardSizeLabel" type="Label" parent="VBoxContainer/DeckBox"]
+margin_left = 425.0
+margin_top = 1.0
+margin_right = 433.0
+margin_bottom = 15.0
+text = "1"
 [connection signal="item_selected" from="VBoxContainer/WeaponSelector" to="." method="_on_WeaponSelector_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/ArmorSelector" to="." method="_on_ArmorSelector_item_selected"]

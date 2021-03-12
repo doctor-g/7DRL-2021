@@ -32,6 +32,16 @@ func init(hero:HeroPawn)->void:
 	_update_weapon_selector()
 	_update_armor_selector()
 	
+	
+func bind_to(game:Game):
+	# Set up connections
+	game.connect("deck_changed", self, "_on_deck_changed")
+	game.connect("discard_changed", self, "_on_discard_changed")
+	
+	# Trigger initial values
+	_on_deck_changed(game._deck)
+	_on_discard_changed(game._discard)
+
 
 func _on_equipment_changed(_the_hero:HeroPawn)->void:
 	_update_weapon_selector()
@@ -53,16 +63,7 @@ func _update_armor_selector():
 
 
 func _texture_from(item:ItemActor)->Texture:
-	var original_texture : Texture = item.get_node("Sprite").texture
-	var result := AtlasTexture.new()
-	result.atlas = original_texture
-# warning-ignore:integer_division
-	var columns := original_texture.get_width() / _TEXTURE_CELL_SIZE
-	var x : int = item.frame % columns
-# warning-ignore:integer_division
-	var y : int = item.frame / columns
-	result.region = Rect2(x*16,y*16,16,16)
-	return result
+	return _extract_texture(item.get_node("Sprite").texture, item.frame)
 
 
 func _on_ac_changed(hero:HeroPawn)->void:
@@ -121,3 +122,23 @@ func _on_ArmorSelector_item_selected(index):
 	_hero.equip_armor(_hero.armor[index])
 	Log.queue("You suit up in your %s." % _hero.equipped_armor.name)
 	_hero.emit_signal("took_turn")
+
+
+func _extract_texture(original:Texture, frame:int)->Texture:
+	var result := AtlasTexture.new()
+	result.atlas = original
+# warning-ignore:integer_division
+	var columns := original.get_width() / _TEXTURE_CELL_SIZE
+	var x : int = frame % columns
+# warning-ignore:integer_division
+	var y : int = frame / columns
+	result.region = Rect2(x*16,y*16,16,16)
+	return result
+
+
+func _on_deck_changed(deck:Array)->void:
+	$VBoxContainer/DeckBox/DeckSizeLabel.text = str(deck.size())
+
+
+func _on_discard_changed(discard:Array)->void:
+	$VBoxContainer/DeckBox/DiscardSizeLabel.text = str(discard.size())

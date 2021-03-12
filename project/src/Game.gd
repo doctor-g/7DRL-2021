@@ -3,6 +3,8 @@ extends Control
 
 signal focus_changed(focus)
 signal phase_changed
+signal deck_changed(deck)
+signal discard_changed(discard)
 
 const PHASES = [ "Build", "Adventure" ]
 const BUILD_PHASE = PHASES[0]
@@ -24,6 +26,7 @@ func _ready():
 	$RoomInfoPanel.bind_to($Dungeon)
 	$ShopPanel.bind_to(self)
 	$AdventurePanel.bind_to(self)
+	$PlayerInfoPanel.bind_to(self)
 	
 	_hero = $Dungeon.hero
 	_hero.connect("hp_changed", self, "_on_Hero_hp_changed")
@@ -69,6 +72,7 @@ func _draw_hand():
 		card.connect("played", self, "_on_Card_played", [card])
 		card.connect("monsterized", self, "_on_Card_monsterized", [card])
 		$CardPanel.add(card)
+	emit_signal("deck_changed", _deck)
 	_update_cards()
 
 
@@ -91,6 +95,7 @@ func add_to_discard(card:Node):
 	if card.is_connected("monsterized", self, "_on_Card_monsterized"):
 		card.disconnect("monsterized", self, "_on_Card_monsterized")
 	_discard.append(card)
+	emit_signal("discard_changed", _discard)
 
 
 func add_item(item_actor:Actor)->void:
@@ -135,7 +140,7 @@ func _on_CardsDoneButton_pressed():
 			var child = $CardPanel.get_card(0)
 			_set_focus(focus + child.focus)
 			$CardPanel.remove(child)
-			_discard.append(child)
+			add_to_discard(child)
 	$CardsDoneButton.disabled = true
 	
 	$Dungeon.start_adventure_phase()
