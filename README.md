@@ -1,4 +1,10 @@
-# 7DRL
+# Build and Delve
+
+A Roguelike Deckbuilder made for the 2021 [7DRL Challenge](https://7drl.com/).
+
+&copy;2021 Paul Gestwicki
+
+This project is licensed under the GNU General Public License. 
 
 ## Third-Party Assets
 
