@@ -6,3 +6,7 @@ func prepare(hero:HeroPawn):
 
 func _on_PlayAgainButton_pressed():
 	get_tree().change_scene("res://src/Game.tscn")
+
+
+func _on_MainMenuButton_pressed():
+	get_tree().change_scene("res://src/MainMenu.tscn")

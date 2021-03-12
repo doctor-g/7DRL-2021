@@ -3,6 +3,7 @@
 [ext_resource path="res://src/UI/GameOverPopup.gd" type="Script" id=1]
 
 [node name="GameOverPopup" type="Popup"]
+visible = true
 anchor_right = 0.25
 anchor_bottom = 0.167
 margin_right = 1.52588e-05
@@ -24,7 +25,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 193.0
-margin_bottom = 93.0
+margin_bottom = 111.0
 custom_constants/separation = 12
 alignment = 1
 __meta__ = {
@@ -32,25 +33,34 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
-margin_top = 7.0
 margin_right = 186.0
-margin_bottom = 21.0
+margin_bottom = 14.0
 text = "You have perished."
 align = 1
 
 [node name="ScoreLabel" type="Label" parent="PanelContainer/VBoxContainer"]
-margin_top = 33.0
+margin_top = 26.0
 margin_right = 186.0
-margin_bottom = 47.0
+margin_bottom = 40.0
 text = "Score: "
 align = 1
 
 [node name="PlayAgainButton" type="Button" parent="PanelContainer/VBoxContainer"]
-margin_top = 59.0
+margin_top = 52.0
 margin_right = 186.0
-margin_bottom = 79.0
+margin_bottom = 72.0
 text = "Play Again"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MainMenuButton" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 186.0
+margin_bottom = 104.0
+text = "Return to Title Screen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="PanelContainer/VBoxContainer/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
