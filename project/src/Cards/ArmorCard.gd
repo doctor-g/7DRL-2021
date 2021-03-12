@@ -30,4 +30,4 @@ func play(game:Game) -> void:
 	armor.ac_bonus = armor_data[1]
 	armor.frame = armor_data[2]
 	game.add_item(armor)
-	Log.queue("You summon %s." % armor.name)
+	Log.log("You summon %s." % armor.name)

@@ -88,5 +88,6 @@ func play(game:Game) -> void:
 	var conf = options[randi() % options.size()]
 	conf["level"] = level
 	game.get_node("Dungeon").replace(conf)
+	Log.log("You reshape the dungeon into a %s." % conf["name"])
 
 	

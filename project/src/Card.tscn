@@ -10,12 +10,12 @@ outline_size = 1
 outline_color = Color( 0.239216, 0.192157, 0.231373, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 14
 use_filter = true
 font_data = ExtResource( 4 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 57, 47 )
 
 [node name="Card" type="Area2D"]
@@ -109,7 +109,7 @@ margin_left = 12.4598
 margin_top = 35.9169
 margin_right = 92.4598
 margin_bottom = 50.9169
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Focus: N"
 __meta__ = {
@@ -121,7 +121,7 @@ margin_left = 12.4598
 margin_top = 52.9814
 margin_right = 103.46
 margin_bottom = 67.9814
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Threat Req: N"
 __meta__ = {
@@ -146,6 +146,6 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 57.7782, 47.8578 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 [connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]
 [connection signal="pressed" from="Control/MonsterizeButton" to="." method="_on_MonsterizeButton_pressed"]

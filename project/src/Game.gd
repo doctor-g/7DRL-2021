@@ -85,9 +85,11 @@ func _on_Card_played(card) -> void:
 	
 func _on_Card_monsterized(card) -> void:
 	$CardPanel.remove(card)
-	$Dungeon.add_monster(MonsterFactory.create_monster(card.level))
+	var monster := MonsterFactory.create_monster(card.level)
+	$Dungeon.add_monster(monster)
 	add_to_discard(card)
 	_update_cards()
+	Log.log("You sacrifice a %s card to conjure a %s." % [card.title, monster.name])
 	
 
 func add_to_discard(card:Node):
