@@ -4,9 +4,10 @@ signal focus_spent
 
 var _game : Game
 
-onready var _strength_button := $VBox/HBox/StrengthButton
-onready var _dexterity_button :=  $VBox/HBox/DexterityButton
-onready var _constitution_button := $VBox/HBox/ConstitutionButton
+onready var _focus_label := $VBox/FocusLabel
+onready var _strength_button := $VBox/StrengthButton
+onready var _dexterity_button :=  $VBox/DexterityButton
+onready var _constitution_button := $VBox/ConstitutionButton
 onready var _buttons = [_strength_button, _dexterity_button, _constitution_button]
 
 
@@ -16,7 +17,7 @@ func bind_to(game:Game)->void:
 	
 
 func _on_focus_changed(focus:int):
-	$VBox/FocusLabel.text = "Focus: %d" % focus
+	_focus_label.text = "Focus: %d" % focus
 	for button in _buttons:
 		button.disabled = focus < 2
 	

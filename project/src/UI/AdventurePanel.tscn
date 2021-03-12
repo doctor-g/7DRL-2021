@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/AdventurePanel.gd" type="Script" id=1]
+[ext_resource path="res://assets/styles/subheading_font.tres" type="DynamicFont" id=2]
 
 [node name="AdventurePanel" type="Control"]
 anchor_right = 1.0
@@ -21,38 +22,39 @@ __meta__ = {
 [node name="VBox" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = -10.0
+custom_constants/separation = 10
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FocusLabel" type="Label" parent="VBox"]
-margin_top = 281.0
-margin_right = 800.0
-margin_bottom = 295.0
+margin_top = 244.0
+margin_right = 780.0
+margin_bottom = 266.0
+custom_fonts/font = ExtResource( 2 )
 text = "Focus: N"
+align = 1
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
-margin_top = 299.0
-margin_right = 800.0
-margin_bottom = 319.0
-
-[node name="StrengthButton" type="Button" parent="VBox/HBox"]
-margin_right = 153.0
-margin_bottom = 20.0
+[node name="StrengthButton" type="Button" parent="VBox"]
+margin_top = 276.0
+margin_right = 780.0
+margin_bottom = 296.0
 text = "Rage (+2 Str / 2 Focus)"
 
-[node name="DexterityButton" type="Button" parent="VBox/HBox"]
-margin_left = 157.0
-margin_right = 357.0
-margin_bottom = 20.0
+[node name="DexterityButton" type="Button" parent="VBox"]
+margin_top = 306.0
+margin_right = 780.0
+margin_bottom = 326.0
 text = "Adrenaline (+2 Dex / 2 Focus)"
 
-[node name="ConstitutionButton" type="Button" parent="VBox/HBox"]
-margin_left = 361.0
-margin_right = 591.0
-margin_bottom = 20.0
+[node name="ConstitutionButton" type="Button" parent="VBox"]
+margin_top = 336.0
+margin_right = 780.0
+margin_bottom = 356.0
 text = "Constitution (+2 TmpHP / 2 Focus)"
-[connection signal="pressed" from="VBox/HBox/StrengthButton" to="." method="_on_StrengthButton_pressed"]
-[connection signal="pressed" from="VBox/HBox/DexterityButton" to="." method="_on_DexterityButton_pressed"]
-[connection signal="pressed" from="VBox/HBox/ConstitutionButton" to="." method="_on_ConstitutionButton_pressed"]
+[connection signal="pressed" from="VBox/StrengthButton" to="." method="_on_StrengthButton_pressed"]
+[connection signal="pressed" from="VBox/DexterityButton" to="." method="_on_DexterityButton_pressed"]
+[connection signal="pressed" from="VBox/ConstitutionButton" to="." method="_on_ConstitutionButton_pressed"]
