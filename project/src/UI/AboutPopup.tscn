@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/styles/subheading_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/UI/AboutPopup.gd" type="Script" id=2]
+
+[node name="AboutPopup" type="Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 793.0
+margin_bottom = 593.0
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_right = 786.0
+margin_bottom = 22.0
+custom_fonts/font = ExtResource( 1 )
+text = "About"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 786.0
+margin_bottom = 30.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 786.0
+margin_bottom = 562.0
+size_flags_vertical = 3
+text = "Build and Delve
+©2021 Paul Gestwicki
+
+This project uses Kenney's 1-Bit Pack spritesheet, which is licensed under CC0 1.0 Universal. You can find this pack at https://www.kenney.nl/assets/bit-pack. Thanks, Kenney!
+
+This project uses Inconsolata and Nanum Gothic Coding fonts, which are licensed under the OFL. Thank you to the Inconsolata Project Authors and NHN Corporation for providing these fonts."
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 566.0
+margin_right = 786.0
+margin_bottom = 586.0
+text = "OK"
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
