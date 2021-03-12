@@ -117,11 +117,15 @@ func _process(_delta):
 			
 		# Otherwise, move there if possible and pick up anything on the floor
 		if not attacked:
-			move_to(desired_x, desired_y)# Pick up anything that was there
-			for actor in actors_there:
-				if actor.pickupable:
-					dungeon.remove(actor)
-					_pickup(actor)
+			var moved := move_to(desired_x, desired_y)
+			if moved:
+				# Pick up anything that was there
+				for actor in actors_there:
+					if actor.pickupable:
+						dungeon.remove(actor)
+						_pickup(actor)
+			else:
+				Log.queue("Oof.")
 
 		emit_signal("took_turn")
 
