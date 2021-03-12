@@ -45,6 +45,7 @@ func _ready():
 
 func _on_Hero_hp_changed()->void:
 	if _hero.hp <= 0:
+		_hero.active = false
 		$GameOverPopup.prepare(_hero)
 		$GameOverPopup.show_modal(true)
 
