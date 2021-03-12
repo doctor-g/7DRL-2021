@@ -52,7 +52,7 @@ margin_top = 5.0
 margin_right = 764.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
-text = "Log ready."
+text = "Ready"
 __meta__ = {
 "_edit_use_anchors_": false
 }
