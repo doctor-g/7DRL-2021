@@ -47,7 +47,7 @@ func refresh():
 		var button : CardButton = CardButton.new()
 		button.disabled = true
 		button.size_flags_vertical = SIZE_EXPAND_FILL
-		button.text = "%s %s (%d Focus)" % [card.title, _romanize(card.level), card.focus]
+		button.text = "%s %s (%d Focus)" % [card.title, _romanize(card.level), card.cost]
 		button.connect("pressed", self, "_on_Shop_button_pressed", [card])
 		button.card = card
 		_button_box.add_child(button)
