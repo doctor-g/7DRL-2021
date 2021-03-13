@@ -35,5 +35,5 @@ func play(game:Game) -> void:
 	weapon.damage = weapon_data[1]
 	weapon.frame = weapon_data[2]
 	game.add_item(weapon)
-	Log.log("You summon a %s." % name)
+	Log.log("You summon a %s." % weapon.name)
 
